@@ -1,7 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gtf.long_life_burning">
-    <!-- Flutter needs it to communicate with the running application
-         to allow setting breakpoints, to provide hot reload, etc.
-    -->
+    package="com.skwcrd.long_life_burning">
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
