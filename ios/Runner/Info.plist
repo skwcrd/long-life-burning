@@ -43,5 +43,20 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSMotionUsageDescription</key>
+	<string>This application tracks your steps</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>This application sync your data with the Apple Health app to give you better insights</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>This application sync your data with the Apple Health app to give you better insights</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This application access to location when open.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This application access to location when in the background.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>
