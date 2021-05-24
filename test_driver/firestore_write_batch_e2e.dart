@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void runWriteBatchTests() {
   group('$WriteBatch', () {
-    /*late*/ FirebaseFirestore firestore;
+    late FirebaseFirestore firestore;
 
     setUpAll(() async {
       firestore = FirebaseFirestore.instance;
@@ -32,14 +32,14 @@ void runWriteBatchTests() {
 
       final DocumentReference<int> doc = collection.doc('doc1')
         .withConverter(
-          fromFirestore: (snapshot, options) => snapshot.data()['value'] as int,
+          fromFirestore: (snapshot, options) => snapshot.data()!['value'] as int,
           toFirestore: (value, options) => {'value': value});
 
       var snapshot = await doc.get();
 
       expect(snapshot.exists, false);
 
-      batch.set<int>(doc, 42);
+      batch.set<int?>(doc, 42);
 
       await batch.commit();
       snapshot = await doc.get();

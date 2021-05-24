@@ -38,7 +38,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    bool compassEnabled = await inspector.isCompassEnabled();
+    bool? compassEnabled = await inspector.isCompassEnabled();
     expect(
       compassEnabled, false);
 
@@ -79,7 +79,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    bool mapToolbarEnabled = await inspector.isMapToolbarEnabled();
+    bool? mapToolbarEnabled = await inspector.isMapToolbarEnabled();
     expect(
       mapToolbarEnabled, false);
 
@@ -116,7 +116,7 @@ void main() {
     final Key key = GlobalKey();
     final Completer<MapInspector> inspectorCompleter = Completer<MapInspector>();
 
-    GoogleMapController controller;
+    late GoogleMapController controller;
 
     const MinMaxZoomPreference initialZoomLevel = MinMaxZoomPreference(4, 8);
     const MinMaxZoomPreference finalZoomLevel = MinMaxZoomPreference(6, 10);
@@ -147,7 +147,7 @@ void main() {
       await controller.moveCamera(
         CameraUpdate.zoomTo(15));
       await tester.pumpAndSettle();
-      double zoomLevel = await inspector.getZoomLevel();
+      double? zoomLevel = await inspector.getZoomLevel();
       expect(
         zoomLevel,
         equals(initialZoomLevel.maxZoom));
@@ -183,7 +183,7 @@ void main() {
       await controller.moveCamera(
         CameraUpdate.zoomTo(15));
       await tester.pumpAndSettle();
-      double zoomLevel = await inspector.getZoomLevel();
+      double? zoomLevel = await inspector.getZoomLevel();
       expect(
         zoomLevel,
         equals(finalZoomLevel.maxZoom));
@@ -217,7 +217,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    bool zoomGesturesEnabled = await inspector.isZoomGesturesEnabled();
+    bool? zoomGesturesEnabled = await inspector.isZoomGesturesEnabled();
     expect(
       zoomGesturesEnabled, false);
 
@@ -257,7 +257,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    bool zoomControlsEnabled = await inspector.isZoomControlsEnabled();
+    bool? zoomControlsEnabled = await inspector.isZoomControlsEnabled();
     expect(
       zoomControlsEnabled,
       !Platform.isIOS);
@@ -302,7 +302,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    bool liteModeEnabled = await inspector.isLiteModeEnabled();
+    bool? liteModeEnabled = await inspector.isLiteModeEnabled();
     expect(
       liteModeEnabled, false);
 
@@ -344,7 +344,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    bool rotateGesturesEnabled = await inspector.isRotateGesturesEnabled();
+    bool? rotateGesturesEnabled = await inspector.isRotateGesturesEnabled();
     expect(
       rotateGesturesEnabled, false);
 
@@ -385,7 +385,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    bool tiltGesturesEnabled = await inspector.isTiltGesturesEnabled();
+    bool? tiltGesturesEnabled = await inspector.isTiltGesturesEnabled();
     expect(
       tiltGesturesEnabled, false);
 
@@ -427,7 +427,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    bool scrollGesturesEnabled = await inspector.isScrollGesturesEnabled();
+    bool? scrollGesturesEnabled = await inspector.isScrollGesturesEnabled();
     expect(
       scrollGesturesEnabled, false);
 
@@ -462,9 +462,7 @@ void main() {
         child: GoogleMap(
           key: key,
           initialCameraPosition: _kInitialCameraPosition,
-          onMapCreated: (controller) {
-            mapControllerCompleter.complete(controller);
-          },
+          onMapCreated: mapControllerCompleter.complete,
         ),
       ));
     final GoogleMapController mapController =
@@ -522,9 +520,7 @@ void main() {
         child: GoogleMap(
           key: key,
           initialCameraPosition: _kInitialCameraPosition,
-          onMapCreated: (controller) {
-            mapControllerCompleter.complete(controller);
-          },
+          onMapCreated: mapControllerCompleter.complete,
         ),
       ));
     await tester.pumpAndSettle();
@@ -611,7 +607,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    bool isTrafficEnabled = await inspector.isTrafficEnabled();
+    bool? isTrafficEnabled = await inspector.isTrafficEnabled();
     expect(
       isTrafficEnabled, true);
 
@@ -652,7 +648,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    final bool isBuildingsEnabled = await inspector.isBuildingsEnabled();
+    final bool? isBuildingsEnabled = await inspector.isBuildingsEnabled();
     expect(
       isBuildingsEnabled, true);
   });
@@ -678,7 +674,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    bool myLocationButtonEnabled = await inspector.isMyLocationButtonEnabled();
+    bool? myLocationButtonEnabled = await inspector.isMyLocationButtonEnabled();
     expect(
       myLocationButtonEnabled, true);
 
@@ -722,7 +718,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    final bool myLocationButtonEnabled =
+    final bool? myLocationButtonEnabled =
         await inspector.isMyLocationButtonEnabled();
     expect(
       myLocationButtonEnabled, false);
@@ -749,7 +745,7 @@ void main() {
       ));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    final bool myLocationButtonEnabled =
+    final bool? myLocationButtonEnabled =
         await inspector.isMyLocationButtonEnabled();
     expect(
       myLocationButtonEnabled, true);
@@ -767,9 +763,7 @@ void main() {
         child: GoogleMap(
           key: key,
           initialCameraPosition: _kInitialCameraPosition,
-          onMapCreated: (controller) {
-            controllerCompleter.complete(controller);
-          },
+          onMapCreated: controllerCompleter.complete,
         ),
       ));
 
@@ -790,9 +784,7 @@ void main() {
         child: GoogleMap(
           key: key,
           initialCameraPosition: _kInitialCameraPosition,
-          onMapCreated: (controller) {
-            controllerCompleter.complete(controller);
-          },
+          onMapCreated: controllerCompleter.complete,
         ),
       ));
 
@@ -818,9 +810,7 @@ void main() {
         child: GoogleMap(
           key: key,
           initialCameraPosition: _kInitialCameraPosition,
-          onMapCreated: (controller) {
-            controllerCompleter.complete(controller);
-          },
+          onMapCreated: controllerCompleter.complete,
         ),
       ));
 
@@ -839,9 +829,7 @@ void main() {
         child: GoogleMap(
           key: key,
           initialCameraPosition: _kInitialCameraPosition,
-          onMapCreated: (controller) {
-            controllerCompleter.complete(controller);
-          },
+          onMapCreated: controllerCompleter.complete,
         ),
       ));
 
@@ -878,9 +866,7 @@ void main() {
         child: GoogleMap(
           key: key,
           initialCameraPosition: _kInitialCameraPosition,
-          onMapCreated: (controller) {
-            controllerCompleter.complete(controller);
-          },
+          onMapCreated: controllerCompleter.complete,
         ),
       ));
 
@@ -917,9 +903,7 @@ void main() {
         child: GoogleMap(
           key: key,
           initialCameraPosition: _kInitialCameraPosition,
-          onMapCreated: (controller) {
-            controllerCompleter.complete(controller);
-          },
+          onMapCreated: controllerCompleter.complete,
         ),
       ));
     final GoogleMapController controller = await controllerCompleter.future;
@@ -1020,9 +1004,7 @@ void main() {
             target: LatLng(10, 15),
           ),
           markers: markers,
-          onMapCreated: (googleMapController) {
-            controllerCompleter.complete(googleMapController);
-          },
+          onMapCreated: controllerCompleter.complete,
         ),
       ));
 
@@ -1078,7 +1060,7 @@ void main() {
       const Duration(seconds: 3));
 
     final MapInspector inspector = await inspectorCompleter.future;
-    final Uint8List bytes = await inspector.takeSnapshot();
+    final Uint8List? bytes = await inspector.takeSnapshot();
     expect(
       bytes?.isNotEmpty, true);
   },
@@ -1130,9 +1112,9 @@ void main() {
       final MapInspector inspector = await inspectorCompleter.future;
 
       final Map<String, dynamic> tileOverlayInfo1 =
-          await inspector.getTileOverlayInfo('tile_overlay_1');
+          await (inspector.getTileOverlayInfo('tile_overlay_1') as FutureOr<Map<String, dynamic>>);
       final Map<String, dynamic> tileOverlayInfo2 =
-          await inspector.getTileOverlayInfo('tile_overlay_2');
+          await (inspector.getTileOverlayInfo('tile_overlay_2') as FutureOr<Map<String, dynamic>>);
 
       expect(
         tileOverlayInfo1['visible'], isTrue);
@@ -1223,8 +1205,8 @@ void main() {
         const Duration(seconds: 3));
 
       final Map<String, dynamic> tileOverlayInfo1 =
-          await inspector.getTileOverlayInfo('tile_overlay_1');
-      final Map<String, dynamic> tileOverlayInfo2 =
+          await (inspector.getTileOverlayInfo('tile_overlay_1') as FutureOr<Map<String, dynamic>>);
+      final Map<String, dynamic>? tileOverlayInfo2 =
           await inspector.getTileOverlayInfo('tile_overlay_2');
 
       expect(
@@ -1286,7 +1268,7 @@ void main() {
 
       await tester.pumpAndSettle(
         const Duration(seconds: 3));
-      final Map<String, dynamic> tileOverlayInfo1 =
+      final Map<String, dynamic>? tileOverlayInfo1 =
           await inspector.getTileOverlayInfo('tile_overlay_1');
 
       expect(
@@ -1312,7 +1294,7 @@ class _DebugTileProvider implements TileProvider {
   );
 
   @override
-  Future<Tile> getTile(int x, int y, int zoom) async {
+  Future<Tile> getTile(int x, int y, int? zoom) async {
     final ui.PictureRecorder recorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(recorder);
     const Offset offset = Offset(0, 0);
@@ -1325,7 +1307,6 @@ class _DebugTileProvider implements TileProvider {
       text: textSpan,
       textDirection: TextDirection.ltr)
     ..layout(
-      minWidth: 0,
       maxWidth: width.toDouble())
     ..paint(
       canvas, offset);
@@ -1344,7 +1325,7 @@ class _DebugTileProvider implements TileProvider {
         (image) => image.toByteData(
           format: ui.ImageByteFormat.png))
       .then(
-        (byteData) => byteData.buffer.asUint8List());
+        (byteData) => byteData!.buffer.asUint8List());
 
     return Tile(
       width, height, byteData);

@@ -47,9 +47,9 @@ class _ErrorService {
   }
 
   void exception({
-    @required String message,
-    Object error,
-    StackTrace stack,
+    required String message,
+    Object? error,
+    StackTrace? stack,
   }) {
     FlutterError.reportError(
       getErrorDetails(
@@ -59,9 +59,9 @@ class _ErrorService {
   }
 
   TimeoutException onTimeout({
-    @required String message,
-    Duration duration,
-    StackTrace stack,
+    required String message,
+    Duration? duration,
+    StackTrace? stack,
   }) {
     final _exception = TimeoutException(
       message, duration);
@@ -76,12 +76,12 @@ class _ErrorService {
   }
 
   FlutterErrorDetails getErrorDetails({
-    @required String message,
-    Object error,
-    StackTrace stack,
+    required String message,
+    Object? error,
+    StackTrace? stack,
   }) => FlutterErrorDetails(
-          exception: error ?? Exception(message ?? ''),
+          exception: error ?? Exception(message),
           stack: stack ?? StackTrace.empty,
           library: "${AppText.app} Exception",
-          context: ErrorDescription(message ?? ''));
+          context: ErrorDescription(message));
 }

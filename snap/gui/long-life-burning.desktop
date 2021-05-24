@@ -1,0 +1,8 @@
+[Desktop Entry]
+    Name=Long Life Burning
+    Comment=Long Life Burning application community for workout
+    Exec=long-life-burning
+    Icon=${SNAP}/meta/gui/long-life-burning.png # replace name to your app name
+    Terminal=false
+    Type=Application
+    Categories=Sport; #adjust accordingly your snap category

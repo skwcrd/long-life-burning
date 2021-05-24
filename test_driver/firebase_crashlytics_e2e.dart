@@ -7,7 +7,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 void testsMain() {
   group('$FirebaseCrashlytics', () {
-    /*late*/ FirebaseCrashlytics crashlytics;
+    late FirebaseCrashlytics crashlytics;
 
     setUpAll(() async {
       await Firebase.initializeApp();
@@ -55,14 +55,15 @@ void testsMain() {
 
       // This is currently only testing that we can log flutter errors without crashing.
       test('should record flutter error', () async {
-        await crashlytics.recordFlutterError(FlutterErrorDetails(
+        await crashlytics.recordFlutterError(
+          FlutterErrorDetails(
             exception: 'foo exception',
             stack: StackTrace.fromString(''),
             context: DiagnosticsNode.message('bar reason'),
             informationCollector: () => <DiagnosticsNode>[
-                  DiagnosticsNode.message('first message'),
-                  DiagnosticsNode.message('second message')
-                ]));
+              DiagnosticsNode.message('first message'),
+              DiagnosticsNode.message('second message')
+            ]));
       });
     });
 
@@ -101,12 +102,6 @@ void testsMain() {
 
     group('setCustomKey', () {
       test('should throw if null', () async {
-        expect(
-          () => crashlytics.setCustomKey(null, null),
-          throwsAssertionError);
-        expect(
-          () => crashlytics.setCustomKey('foo', null),
-          throwsAssertionError);
         expect(
           () => crashlytics.setCustomKey('foo', <dynamic>[]),
           throwsAssertionError);

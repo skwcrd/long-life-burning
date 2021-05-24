@@ -15,7 +15,7 @@ void main() {
 
   testWidgets('Android-only functionality', (tester) async {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      await FirebaseAnalytics().android.setSessionTimeoutDuration(1000);
+      await FirebaseAnalytics().android!.setSessionTimeoutDuration(1000);
     } else {
       expect(FirebaseAnalytics().android, isNull);
     }

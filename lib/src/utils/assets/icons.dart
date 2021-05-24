@@ -12,8 +12,8 @@ class AppIcon {
   static final IconData home =
       Platform.isAndroid ? _IconAndroid.home : _IconiOS.home;
 
-  static final IconData nearMe =
-      Platform.isAndroid ? _IconAndroid.nearMe : _IconiOS.nearMe;
+  static final IconData nearby =
+      Platform.isAndroid ? _IconAndroid.nearby : _IconiOS.nearby;
 
   static final IconData event =
       Platform.isAndroid ? _IconAndroid.event : _IconiOS.event;
@@ -39,7 +39,7 @@ class _IconAndroid {
     fontFamily: _materialFamily,
   );
 
-  static const IconData nearMe = IconData(
+  static const IconData nearby = IconData(
     0xe569,
     fontFamily: _materialFamily,
   );
@@ -76,7 +76,7 @@ class _IconiOS {
     fontFamily: _cupertinoFamily,
   );
 
-  static const IconData nearMe = IconData(
+  static const IconData nearby = IconData(
     0xf474,
     fontFamily: _cupertinoFamily,
   );

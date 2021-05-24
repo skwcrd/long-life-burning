@@ -37,7 +37,7 @@ void testsMain() {
       email: testDisabledEmail,
       password: testPassword,
     );
-    await emulatorDisableUser(disabledUserCredential.user.uid);
+    await emulatorDisableUser(disabledUserCredential.user!.uid);
 
     await ensureSignedOut();
   });

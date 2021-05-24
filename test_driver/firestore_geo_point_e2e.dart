@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void runGeoPointTests() {
   group('$GeoPoint', () {
-    FirebaseFirestore /*?*/ firestore;
+    FirebaseFirestore? firestore;
 
     setUpAll(() async {
       firestore = FirebaseFirestore.instance;
@@ -16,8 +16,8 @@ void runGeoPointTests() {
       String path,
     ) async {
       final String prefixedPath = 'flutter-tests/$path';
-      await firestore.doc(prefixedPath).delete();
-      return firestore.doc(prefixedPath);
+      await firestore!.doc(prefixedPath).delete();
+      return firestore!.doc(prefixedPath);
     }
 
     test('sets a $GeoPoint & returns one', () async {
@@ -31,7 +31,7 @@ void runGeoPointTests() {
 
       final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
 
-      final GeoPoint geopoint = snapshot.data()['foo'] as GeoPoint;
+      final GeoPoint geopoint = snapshot.data()!['foo'] as GeoPoint;
       expect(geopoint, isA<GeoPoint>());
       expect(geopoint.latitude, equals(10));
       expect(geopoint.longitude, equals(-10));
@@ -50,7 +50,7 @@ void runGeoPointTests() {
 
       final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
 
-      final GeoPoint geopoint = snapshot.data()['foo'] as GeoPoint;
+      final GeoPoint geopoint = snapshot.data()!['foo'] as GeoPoint;
       expect(geopoint, isA<GeoPoint>());
       expect(geopoint.latitude, equals(-10));
       expect(geopoint.longitude, equals(10));

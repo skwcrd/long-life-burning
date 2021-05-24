@@ -1,4 +1,4 @@
-library app;
+library application;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'
@@ -7,25 +7,22 @@ import 'package:flutter/foundation.dart'
     kProfileMode;
 
 import 'package:get/get.dart'
-  show
-    GetPage,
-    Transition,
-    GetMaterialApp;
+  show GetMaterialApp;
 
 import 'controllers/controllers.dart'
   show AppBinding;
-import 'services/firebase/firebase.dart';
+import 'services/firebase/firebase.dart'
+  show FirebaseService;
 import 'utils/utils.dart'
   show
     AppText,
     AppTheme;
-import 'views/views.dart';
+import 'views/views.dart'
+  show IndexView;
 
-part 'route.dart';
-
-class App extends StatelessWidget {
-  /// start widget root app, run in main.
-  const App({ Key key }) : super(key: key);
+class MobileApp extends StatelessWidget {
+  /// start widget root app, run in main app.
+  const MobileApp({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) =>
@@ -33,9 +30,9 @@ class App extends StatelessWidget {
       enableLog: kDebugMode,
       showPerformanceOverlay: kProfileMode,
       debugShowCheckedModeBanner: kDebugMode,
-      logWriterCallback: (text, { isError }) {
-        if ( isError ?? false ) {
-          if ( (text != null) && (text.isNotEmpty) ) {
+      logWriterCallback: (text, { isError = false }) {
+        if ( isError ) {
+          if ( text.isNotEmpty ) {
             debugPrint(text);
           }
         } else {
@@ -59,14 +56,9 @@ class App extends StatelessWidget {
       /// [AppBarTheme] set appbar elevation.
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      /// The application's top-level routing table.
-      /// [routes] routing other pages in application.
-      /// can edit [routeName] in class define on page class.
-      getPages: AppRoute.pages,
-      defaultTransition: Transition.rightToLeft,
       /// The name of the first route to show,
       /// if a [Navigator] is built.
       /// (start with index page)
-      initialRoute: AppRoute.index,
+      home: const IndexView(),
     );
 }

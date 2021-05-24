@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void runTimestampTests() {
   group('$Timestamp', () {
-    FirebaseFirestore /*?*/ firestore;
+    FirebaseFirestore? firestore;
 
     setUpAll(() async {
       firestore = FirebaseFirestore.instance;
@@ -16,8 +16,8 @@ void runTimestampTests() {
       String path,
     ) async {
       final String prefixedPath = 'flutter-tests/$path';
-      await firestore.doc(prefixedPath).delete();
-      return firestore.doc(prefixedPath);
+      await firestore!.doc(prefixedPath).delete();
+      return firestore!.doc(prefixedPath);
     }
 
     test('sets a $Timestamp & returns one', () async {
@@ -29,7 +29,7 @@ void runTimestampTests() {
         <String, dynamic>{'foo': Timestamp.fromDate(date)});
 
       final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-      final Timestamp timestamp = snapshot.data()['foo'] as Timestamp;
+      final Timestamp timestamp = snapshot.data()!['foo'] as Timestamp;
       expect(timestamp, isA<Timestamp>());
       expect(
         timestamp.millisecondsSinceEpoch,
@@ -47,7 +47,7 @@ void runTimestampTests() {
       await doc.update({'foo': date});
 
       final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-      final Timestamp timestamp = snapshot.data()['foo'] as Timestamp;
+      final Timestamp timestamp = snapshot.data()!['foo'] as Timestamp;
       expect(timestamp, isA<Timestamp>());
       expect(
         timestamp.millisecondsSinceEpoch,

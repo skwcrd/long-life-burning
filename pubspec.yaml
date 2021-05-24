@@ -20,7 +20,7 @@ author: Sukawit Charoendet <sukawit.ch@hotmail.com>
 homepage: https://github.com/skwcrd/long-life-burning
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -28,21 +28,21 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.3
 
   # Stage management
   get: ^4.1.4
 
   # Firebase
-  firebase_analytics: ^8.0.4
-  firebase_crashlytics: ^2.0.3
-  cloud_firestore: ^2.1.0
-  firebase_auth: ^1.1.4
+  firebase_analytics: ^8.1.0
+  firebase_crashlytics: ^2.0.4
+  cloud_firestore: ^2.2.0
+  firebase_auth: ^1.2.0
 
   # Notify
   badges: ^2.0.1
   flutter_app_badger: ^1.2.0
-  firebase_messaging: ^9.1.4
+  firebase_messaging: ^10.0.0
   flutter_local_notifications: ^5.0.0+4
 
   # Database
@@ -53,11 +53,11 @@ dependencies:
   # Map
   location: ^4.1.1
   geolocator: ^7.0.3
-  google_maps_flutter: ^2.0.3
+  google_maps_flutter: ^2.0.5
   # google_maps_webservice: ^0.0.19
 
   # Health
-  health: ^3.0.5
+  health: ^3.0.6
   pedometer: ^3.0.0
 
 dev_dependencies:

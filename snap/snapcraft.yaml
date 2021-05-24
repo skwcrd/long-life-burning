@@ -1,0 +1,28 @@
+name: long-life-burning
+version: 2.0.0
+summary: Long Life Burning
+description: Application community for workout. Supported both Android and iOS. Bachelor's Degree Project (Thesis).
+
+confinement: strict
+base: core18
+grade: stable
+
+slots:
+  dbus-long-life-burning: # adjust accordingly to your app name
+    interface: dbus
+    bus: session
+    name: com.skwcrd.long_life_burning # adjust accordingly to your app name and
+
+apps:
+  long-life-burning:
+    command: long_life_burning
+    extensions: [ flutter-master ] # Where "master" defines which Flutter channel to use for the build
+    plugs:
+    - network
+    slots:
+      - dbus-long-life-burning
+parts:
+  long-life-burning:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart # The main entry-point file of the application

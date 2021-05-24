@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void runFieldValueTests() {
   group('$FieldValue', () {
-    FirebaseFirestore /*?*/ firestore;
+    FirebaseFirestore? firestore;
 
     setUpAll(() async {
       firestore = FirebaseFirestore.instance;
@@ -15,8 +15,8 @@ void runFieldValueTests() {
     Future<DocumentReference<Map<String, dynamic>>> initializeTest(
         String path) async {
       final String prefixedPath = 'flutter-tests/$path';
-      await firestore.doc(prefixedPath).delete();
-      return firestore.doc(prefixedPath);
+      await firestore!.doc(prefixedPath).delete();
+      return firestore!.doc(prefixedPath);
     }
 
     group('FieldValue.increment()', () {
@@ -27,7 +27,7 @@ void runFieldValueTests() {
           <String, dynamic>{'foo': 2});
         await doc.update({'foo': FieldValue.increment(1)});
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        expect(snapshot.data()['foo'], equals(3));
+        expect(snapshot.data()!['foo'], equals(3));
       });
 
       test('decrements a number', () async {
@@ -37,7 +37,7 @@ void runFieldValueTests() {
           <String, dynamic>{'foo': 2});
         await doc.update({'foo': FieldValue.increment(-1)});
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        expect(snapshot.data()['foo'], equals(1));
+        expect(snapshot.data()!['foo'], equals(1));
       });
 
       test('sets an increment if it does not exist', () async {
@@ -50,7 +50,7 @@ void runFieldValueTests() {
             'foo': FieldValue.increment(1),
           });
         final DocumentSnapshot<Map<String, dynamic>> snapshot2 = await doc.get();
-        expect(snapshot2.data()['foo'], equals(1));
+        expect(snapshot2.data()!['foo'], equals(1));
       });
     });
 
@@ -63,7 +63,7 @@ void runFieldValueTests() {
             'foo': FieldValue.serverTimestamp(),
           });
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        expect(snapshot.data()['foo'], isA<Timestamp>());
+        expect(snapshot.data()!['foo'], isA<Timestamp>());
       });
 
       test('updates a server time value', () async {
@@ -74,13 +74,13 @@ void runFieldValueTests() {
             'foo': FieldValue.serverTimestamp(),
           });
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        final Timestamp serverTime1 = snapshot.data()['foo'] as Timestamp;
+        final Timestamp serverTime1 = snapshot.data()!['foo'] as Timestamp;
         expect(serverTime1, isA<Timestamp>());
         await Future.delayed(
           const Duration(milliseconds: 100), () => null);
         await doc.update({'foo': FieldValue.serverTimestamp()});
         final DocumentSnapshot<Map<String, dynamic>> snapshot2 = await doc.get();
-        final Timestamp serverTime2 = snapshot2.data()['foo'] as Timestamp;
+        final Timestamp serverTime2 = snapshot2.data()!['foo'] as Timestamp;
         expect(serverTime2, isA<Timestamp>());
         expect(
             serverTime2.microsecondsSinceEpoch >
@@ -116,7 +116,7 @@ void runFieldValueTests() {
           'foo': FieldValue.arrayUnion(<dynamic>[3, 4]),
         });
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        expect(snapshot.data()['foo'], equals([1, 2, 3, 4]));
+        expect(snapshot.data()!['foo'], equals([1, 2, 3, 4]));
       });
 
       test('updates an array if current value is not an array', () async {
@@ -128,7 +128,7 @@ void runFieldValueTests() {
           'foo': FieldValue.arrayUnion(<dynamic>[3, 4])
         });
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        expect(snapshot.data()['foo'], equals([3, 4]));
+        expect(snapshot.data()!['foo'], equals([3, 4]));
       });
 
       test('sets an array if current value is not an array', () async {
@@ -141,7 +141,7 @@ void runFieldValueTests() {
             'foo': FieldValue.arrayUnion(<dynamic>[3, 4]),
           });
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        expect(snapshot.data()['foo'], equals([3, 4]));
+        expect(snapshot.data()!['foo'], equals([3, 4]));
       });
     });
 
@@ -157,7 +157,7 @@ void runFieldValueTests() {
           'foo': FieldValue.arrayRemove(<dynamic>[3, 4]),
         });
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        expect(snapshot.data()['foo'], equals([1, 2]));
+        expect(snapshot.data()!['foo'], equals([1, 2]));
       });
 
       test('removes & updates an array if existing item is not an array',
@@ -170,7 +170,7 @@ void runFieldValueTests() {
           'foo': FieldValue.arrayUnion(<dynamic>[3, 4]),
         });
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        expect(snapshot.data()['foo'], equals([3, 4]));
+        expect(snapshot.data()!['foo'], equals([3, 4]));
       });
 
       test('removes & sets an array if existing item is not an array',
@@ -184,7 +184,7 @@ void runFieldValueTests() {
             'foo': FieldValue.arrayUnion(<dynamic>[3, 4]),
           });
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        expect(snapshot.data()['foo'], equals([3, 4]));
+        expect(snapshot.data()!['foo'], equals([3, 4]));
       });
 
       // ignore: todo
@@ -204,7 +204,7 @@ void runFieldValueTests() {
           'foo': FieldValue.arrayUnion(<dynamic>[2, ref]),
         });
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await doc.get();
-        expect(snapshot.data()['foo'], equals([1, 2, ref]));
+        expect(snapshot.data()!['foo'], equals([1, 2, ref]));
       },
       skip: true);
     });

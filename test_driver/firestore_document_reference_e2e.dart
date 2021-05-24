@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void runDocumentReferenceTests() {
   group('$DocumentReference', () {
-    /*late*/ FirebaseFirestore firestore;
+    late FirebaseFirestore firestore;
 
     setUpAll(() async {
       firestore = FirebaseFirestore.instance;
@@ -96,11 +96,11 @@ void runDocumentReferenceTests() {
         final value1 = doc1.snapshots()
           .first
           .then<dynamic>(
-            (s) => s.data()['test']);
+            (s) => s.data()!['test']);
         final value2 = doc2.snapshots()
           .first
           .then<dynamic>(
-            (s) => s.data()['test']);
+            (s) => s.data()!['test']);
 
         await expectLater(value1, completion('value1'));
         await expectLater(value2, completion('value2'));
@@ -121,15 +121,15 @@ void runDocumentReferenceTests() {
                 expect(snapshot.exists, isFalse);
               } else if (call == 2) {
                 expect(snapshot.exists, isTrue);
-                expect(snapshot.data()['bar'], equals('baz'));
+                expect(snapshot.data()!['bar'], equals('baz'));
               } else if (call == 3) {
                 expect(snapshot.exists, isFalse);
               } else if (call == 4) {
                 expect(snapshot.exists, isTrue);
-                expect(snapshot.data()['foo'], equals('bar'));
+                expect(snapshot.data()!['foo'], equals('bar'));
               } else if (call == 5) {
                 expect(snapshot.exists, isTrue);
-                expect(snapshot.data()['foo'], equals('baz'));
+                expect(snapshot.data()!['foo'], equals('baz'));
               } else {
                 fail('Should not have been called');
               }
@@ -346,7 +346,7 @@ void runDocumentReferenceTests() {
           });
 
         final DocumentSnapshot<Map<String, dynamic>> snapshot = await document.get();
-        final Map<String, dynamic> data = snapshot.data();
+        final Map<String, dynamic> data = snapshot.data()!;
 
         expect(data['string'], equals('foo bar'));
         expect(data['number_32'], equals(123));
@@ -413,7 +413,7 @@ void runDocumentReferenceTests() {
       test('set/snapshot/get', () async {
         final foo = await initializeTest('foo');
         final fooConverter = foo.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 

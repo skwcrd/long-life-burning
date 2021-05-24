@@ -12,7 +12,7 @@ void runUserTests() {
     group('getIdToken()', () {
       test('should return a token', () async {
         // Setup
-        User user;
+        User? user;
         UserCredential userCredential;
 
         userCredential =
@@ -23,15 +23,15 @@ void runUserTests() {
         user = userCredential.user;
 
         // Test
-        final token = await user.getIdToken();
+        final token = await user!.getIdToken();
 
-        // // Assertions
+        // Assertions
         expect(token.length, greaterThan(24));
       });
 
       test('should catch error', () async {
         // Setup
-        User user;
+        User? user;
         UserCredential userCredential;
 
         userCredential =
@@ -46,7 +46,7 @@ void runUserTests() {
 
         try {
           // Test
-          await user.getIdToken();
+          await user!.getIdToken();
         } on FirebaseAuthException catch (_) {
           return;
         } catch (e) {
@@ -59,7 +59,7 @@ void runUserTests() {
     group('getIdTokenResult()', () {
       test('should return a valid IdTokenResult Object', () async {
         // Setup
-        User user;
+        User? user;
         UserCredential userCredential;
 
         userCredential = await FirebaseAuth.instance
@@ -68,14 +68,14 @@ void runUserTests() {
         user = userCredential.user;
 
         // Test
-        final idTokenResult = await user.getIdTokenResult();
+        final idTokenResult = await user!.getIdTokenResult();
 
         // Assertions
         expect(idTokenResult.token.runtimeType, equals(String));
         expect(idTokenResult.authTime.runtimeType, equals(DateTime));
         expect(idTokenResult.issuedAtTime.runtimeType, equals(DateTime));
         expect(idTokenResult.expirationTime.runtimeType, equals(DateTime));
-        expect(idTokenResult.token.length, greaterThan(24));
+        expect(idTokenResult.token!.length, greaterThan(24));
         expect(idTokenResult.signInProvider, equals('password'));
       });
       // TODO(auth): add custom claims and tenant id tests for id token result
@@ -84,19 +84,19 @@ void runUserTests() {
     group('linkWithCredential()', () {
       test('should link anonymous account <-> email account', () async {
         await FirebaseAuth.instance.signInAnonymously();
-        final currentUID = FirebaseAuth.instance.currentUser.uid;
+        final currentUID = FirebaseAuth.instance.currentUser!.uid;
 
         final linkedUserCredential = await FirebaseAuth
-            .instance.currentUser
+            .instance.currentUser!
             .linkWithCredential(EmailAuthProvider.credential(
           email: email,
           password: testPassword,
         ));
 
-        final linkedUser = linkedUserCredential.user;
+        final linkedUser = linkedUserCredential.user!;
         expect(linkedUser.email, equals(email));
         expect(
-            linkedUser.email, equals(FirebaseAuth.instance.currentUser.email));
+            linkedUser.email, equals(FirebaseAuth.instance.currentUser!.email));
         expect(linkedUser.uid, equals(currentUID));
         expect(linkedUser.isAnonymous, isFalse);
       });
@@ -111,7 +111,7 @@ void runUserTests() {
 
         // Test
         try {
-          await FirebaseAuth.instance.currentUser
+          await FirebaseAuth.instance.currentUser!
               .linkWithCredential(EmailAuthProvider.credential(
             email: email,
             password: testPassword,
@@ -123,7 +123,7 @@ void runUserTests() {
               'The email address is already in use by another account.');
 
           // clean up
-          await FirebaseAuth.instance.currentUser.delete();
+          await FirebaseAuth.instance.currentUser!.delete();
           return;
         }
 
@@ -213,16 +213,16 @@ void runUserTests() {
         // Setup
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: email, password: testPassword);
-        final initialUser = FirebaseAuth.instance.currentUser;
+        final initialUser = FirebaseAuth.instance.currentUser!;
 
         // Test
         final credential =
             EmailAuthProvider.credential(email: email, password: testPassword);
-        await FirebaseAuth.instance.currentUser
+        await FirebaseAuth.instance.currentUser!
             .reauthenticateWithCredential(credential);
 
         // Assertions
-        final currentUser = FirebaseAuth.instance.currentUser;
+        final currentUser = FirebaseAuth.instance.currentUser!;
         expect(currentUser.email, equals(email));
         expect(currentUser.uid, equals(initialUser.uid));
       });
@@ -241,7 +241,7 @@ void runUserTests() {
           // Test
           final credential = EmailAuthProvider.credential(
               email: email, password: testPassword);
-          await FirebaseAuth.instance.currentUser
+          await FirebaseAuth.instance.currentUser!
               .reauthenticateWithCredential(credential);
         } on FirebaseAuthException catch (e) {
           // Assertions
@@ -250,7 +250,7 @@ void runUserTests() {
               e.message,
               equals(
                   'The supplied credentials do not correspond to the previously signed in user.'));
-          await FirebaseAuth.instance.currentUser.delete(); //clean up
+          await FirebaseAuth.instance.currentUser!.delete(); //clean up
           return;
         } catch (e) {
           fail('should have thrown an FirebaseAuthException');
@@ -264,7 +264,7 @@ void runUserTests() {
         final userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
                 email: email, password: testPassword);
-        final user = userCredential.user;
+        final user = userCredential.user!;
 
         try {
           // Test
@@ -319,7 +319,7 @@ void runUserTests() {
           // Test
           final credential = EmailAuthProvider.credential(
               email: email, password: 'WRONG_testPassword');
-          await FirebaseAuth.instance.currentUser
+          await FirebaseAuth.instance.currentUser!
               .reauthenticateWithCredential(credential);
         } on FirebaseAuthException catch (e) {
           // Assertions
@@ -341,7 +341,7 @@ void runUserTests() {
       test('should not error', () async {
         await FirebaseAuth.instance.signInAnonymously();
         try {
-          await FirebaseAuth.instance.currentUser.reload();
+          await FirebaseAuth.instance.currentUser!.reload();
           await FirebaseAuth.instance.signOut();
         } catch (e) {
           fail('should not throw error');
@@ -355,7 +355,7 @@ void runUserTests() {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: generateRandomEmail(), password: testPassword);
         try {
-          await FirebaseAuth.instance.currentUser.sendEmailVerification();
+          await FirebaseAuth.instance.currentUser!.sendEmailVerification();
         } catch (e) {
           fail('should not throw error');
         }
@@ -373,7 +373,7 @@ void runUserTests() {
 
         // Test
         try {
-          await FirebaseAuth.instance.currentUser
+          await FirebaseAuth.instance.currentUser!
               .sendEmailVerification(actionCodeSettings);
         } catch (error) {
           fail(error.toString());
@@ -389,20 +389,20 @@ void runUserTests() {
 
         final credential =
             EmailAuthProvider.credential(email: email, password: testPassword);
-        await FirebaseAuth.instance.currentUser.linkWithCredential(credential);
+        await FirebaseAuth.instance.currentUser!.linkWithCredential(credential);
 
         // verify user is linked
-        final linkedUser = FirebaseAuth.instance.currentUser;
+        final linkedUser = FirebaseAuth.instance.currentUser!;
         expect(linkedUser.email, email);
         expect(linkedUser.providerData, isA<List<UserInfo>>());
         expect(linkedUser.providerData.length, equals(1));
 
         // Test
-        await FirebaseAuth.instance.currentUser
+        await FirebaseAuth.instance.currentUser!
             .unlink(EmailAuthProvider.PROVIDER_ID);
 
         // Assertions
-        final unlinkedUser = FirebaseAuth.instance.currentUser;
+        final unlinkedUser = FirebaseAuth.instance.currentUser!;
         expect(unlinkedUser.providerData, isA<List<UserInfo>>());
         expect(unlinkedUser.providerData.length, equals(0));
       });
@@ -413,15 +413,15 @@ void runUserTests() {
 
         final credential =
             EmailAuthProvider.credential(email: email, password: testPassword);
-        await FirebaseAuth.instance.currentUser.linkWithCredential(credential);
+        await FirebaseAuth.instance.currentUser!.linkWithCredential(credential);
 
         // verify user is linked
-        final linkedUser = FirebaseAuth.instance.currentUser;
+        final linkedUser = FirebaseAuth.instance.currentUser!;
         expect(linkedUser.email, email);
 
         // Test
         try {
-          await FirebaseAuth.instance.currentUser.unlink('invalid');
+          await FirebaseAuth.instance.currentUser!.unlink('invalid');
         } on FirebaseAuthException catch (e) {
           expect(e.code, 'no-such-provider');
           expect(e.message,
@@ -439,7 +439,7 @@ void runUserTests() {
         await FirebaseAuth.instance.signInAnonymously();
         // Test
         try {
-          await FirebaseAuth.instance.currentUser
+          await FirebaseAuth.instance.currentUser!
               .unlink(EmailAuthProvider.PROVIDER_ID);
         } on FirebaseAuthException catch (e) {
           expect(e.code, 'no-such-provider');
@@ -459,11 +459,11 @@ void runUserTests() {
         // Setup
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailBefore, password: testPassword);
-        expect(FirebaseAuth.instance.currentUser.email, equals(emailBefore));
+        expect(FirebaseAuth.instance.currentUser!.email, equals(emailBefore));
 
         // Update user email
-        await FirebaseAuth.instance.currentUser.updateEmail(email);
-        expect(FirebaseAuth.instance.currentUser.email, equals(email));
+        await FirebaseAuth.instance.currentUser!.updateEmail(email);
+        expect(FirebaseAuth.instance.currentUser!.email, equals(email));
       });
     });
 
@@ -476,7 +476,7 @@ void runUserTests() {
             .createUserWithEmailAndPassword(email: email, password: pass);
 
         // Update user password
-        await FirebaseAuth.instance.currentUser.updatePassword(pass2);
+        await FirebaseAuth.instance.currentUser!.updatePassword(pass2);
 
         // // Sign out
         await FirebaseAuth.instance.signOut();
@@ -487,7 +487,7 @@ void runUserTests() {
 
         // Assertions
         expect(FirebaseAuth.instance.currentUser, isA<Object>());
-        expect(FirebaseAuth.instance.currentUser.email, equals(email));
+        expect(FirebaseAuth.instance.currentUser!.email, equals(email));
       });
       test('should throw error if password is weak', () async {
         // Setup
@@ -497,7 +497,7 @@ void runUserTests() {
         // Test
         try {
           // Update user password
-          await FirebaseAuth.instance.currentUser.updatePassword('weak');
+          await FirebaseAuth.instance.currentUser!.updatePassword('weak');
         } on FirebaseAuthException catch (e) {
           expect(e.code, 'weak-password');
           expect(e.message, 'Password should be at least 6 characters');
@@ -515,11 +515,11 @@ void runUserTests() {
         await FirebaseAuth.instance.signInAnonymously();
 
         // Test
-        FirebaseAuth.instance.currentUser.refreshToken;
+        FirebaseAuth.instance.currentUser!.refreshToken;
 
         // Assertions
-        expect(FirebaseAuth.instance.currentUser.refreshToken, isA<String>());
-        expect(FirebaseAuth.instance.currentUser.refreshToken, equals(''));
+        expect(FirebaseAuth.instance.currentUser!.refreshToken, isA<String>());
+        expect(FirebaseAuth.instance.currentUser!.refreshToken, equals(''));
       }, skip: kIsWeb);
 
       test('should return a token on web', () async {
@@ -527,11 +527,11 @@ void runUserTests() {
         await FirebaseAuth.instance.signInAnonymously();
 
         // Test
-        FirebaseAuth.instance.currentUser.refreshToken;
+        FirebaseAuth.instance.currentUser!.refreshToken;
 
         // Assertions
-        expect(FirebaseAuth.instance.currentUser.refreshToken, isA<String>());
-        expect(FirebaseAuth.instance.currentUser.refreshToken.isEmpty, isFalse);
+        expect(FirebaseAuth.instance.currentUser!.refreshToken, isA<String>());
+        expect(FirebaseAuth.instance.currentUser!.refreshToken!.isEmpty, isFalse);
       }, skip: !kIsWeb);
     });
 
@@ -542,16 +542,16 @@ void runUserTests() {
         // Setup
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: generateRandomEmail(), password: testPassword);
-        final user = FirebaseAuth.instance.currentUser;
+        final user = FirebaseAuth.instance.currentUser!;
 
         // Test
         final metadata = user.metadata;
 
         // Assertions
         expect(metadata.lastSignInTime, isA<DateTime>());
-        expect(metadata.lastSignInTime.year, DateTime.now().year);
+        expect(metadata.lastSignInTime!.year, DateTime.now().year);
         expect(metadata.creationTime, isA<DateTime>());
-        expect(metadata.creationTime.year, DateTime.now().year);
+        expect(metadata.creationTime!.year, DateTime.now().year);
       });
     });
 
@@ -565,13 +565,13 @@ void runUserTests() {
             email: email, password: testPassword);
 
         // Update user profile
-        await FirebaseAuth.instance.currentUser.updateProfile(
+        await FirebaseAuth.instance.currentUser!.updateProfile(
           displayName: displayName,
           photoURL: photoURL,
         );
 
-        await FirebaseAuth.instance.currentUser.reload();
-        final user = FirebaseAuth.instance.currentUser;
+        await FirebaseAuth.instance.currentUser!.reload();
+        final user = FirebaseAuth.instance.currentUser!;
 
         // Assertions
         expect(user, isA<Object>());
@@ -634,7 +634,7 @@ void runUserTests() {
 
           try {
             // Update user profile
-            await FirebaseAuth.instance.currentUser.updatePhoneNumber(
+            await FirebaseAuth.instance.currentUser!.updatePhoneNumber(
                 PhoneAuthProvider.credential(
                     verificationId: 'invalid', smsCode: '123456'));
           } on FirebaseAuthException catch (e) {
@@ -702,7 +702,7 @@ void runUserTests() {
     group('delete()', () {
       test('should delete a user', () async {
         // Setup
-        User user;
+        User? user;
         UserCredential userCredential;
 
         userCredential = await FirebaseAuth.instance
@@ -711,7 +711,7 @@ void runUserTests() {
         user = userCredential.user;
 
         // Test
-        await user.delete();
+        await user!.delete();
 
         // Assertions
         expect(FirebaseAuth.instance.currentUser, equals(null));
@@ -719,8 +719,9 @@ void runUserTests() {
             .createUserWithEmailAndPassword(
                 email: email, password: testPassword)
             .then((userCredential) {
-          expect(FirebaseAuth.instance.currentUser.email, equals(email));
+          expect(FirebaseAuth.instance.currentUser!.email, equals(email));
           return;
+        // ignore: argument_type_not_assignable_to_error_handler
         }).catchError(() {
           fail('Should have successfully created user after deletion');
         });
@@ -729,7 +730,7 @@ void runUserTests() {
       test('should throw an error on delete when no user is signed in',
           () async {
         // Setup
-        User user;
+        User? user;
         UserCredential userCredential;
 
         userCredential = await FirebaseAuth.instance
@@ -741,7 +742,7 @@ void runUserTests() {
 
         try {
           // Test
-          await user.delete();
+          await user!.delete();
         } on FirebaseAuthException catch (e) {
           // Assertions
           expect(e.code, 'no-current-user');

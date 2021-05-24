@@ -37,11 +37,13 @@ void testsMain() {
   runCollectionReferenceTests();
   runDocumentChangeTests();
   runDocumentReferenceTests();
+
   runFieldValueTests();
   runGeoPointTests();
   runQueryTests();
   runSnapshotMetadataTests();
   runTimestampTests();
+
   runTransactionTests();
   runWriteBatchTests();
 }

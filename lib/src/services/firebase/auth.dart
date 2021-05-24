@@ -6,12 +6,12 @@ class _AuthService {
 
   final FirebaseAuth _auth;
 
-  Stream<User> get authStateChanges =>
+  Stream<User?> get authStateChanges =>
       _auth.authStateChanges();
 
   Future<void> signin({
-    @required String email,
-    @required String password,
+    required String email,
+    required String password,
     int timeout = 10,
   }) async {
     await _auth
@@ -29,8 +29,8 @@ class _AuthService {
   }
 
   Future<void> signup({
-    @required String email,
-    @required String password,
+    required String email,
+    required String password,
     String name = '',
     int timeout = 10,
   }) async {
@@ -47,7 +47,7 @@ class _AuthService {
             stack: StackTrace.current);
         });
 
-    await _credential.user.updateProfile(
+    await _credential.user!.updateProfile(
       displayName: name);
 
     await signout();

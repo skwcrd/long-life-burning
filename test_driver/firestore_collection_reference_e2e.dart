@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void runCollectionReferenceTests() {
   group('$CollectionReference', () {
-    /*late*/ FirebaseFirestore firestore;
+    late FirebaseFirestore firestore;
 
     setUpAll(() async {
       firestore = FirebaseFirestore.instance;
@@ -37,7 +37,7 @@ void runCollectionReferenceTests() {
 
       expect(
         randNum,
-        equals(snapshot.data()['value']));
+        equals(snapshot.data()!['value']));
     });
 
     test('snapshots() can be reused', () async {
@@ -84,7 +84,7 @@ void runCollectionReferenceTests() {
       test('add/snapshot', () async {
         final foo = await initializeTest('foo');
         final fooConverter = foo.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 

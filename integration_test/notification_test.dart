@@ -8,7 +8,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   group('initialize()', () {
     setUpAll(() async {
@@ -23,7 +23,7 @@ void main() {
           InitializationSettings(
               android: initializationSettingsAndroid,
               iOS: initializationSettingsIOS);
-      final bool initialised = await flutterLocalNotificationsPlugin
+      final bool? initialised = await flutterLocalNotificationsPlugin
           .initialize(initializationSettings);
       expect(initialised, isTrue);
     });

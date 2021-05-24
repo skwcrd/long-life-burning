@@ -11,7 +11,7 @@ import 'auth_test_utils.dart';
 void runInstanceTests() {
   group('FirebaseAuth.instance', () {
     Future<void> commonSuccessCallback(UserCredential credential) async {
-      final currentUser = credential.user;
+      final currentUser = credential.user!;
 
       expect(
         currentUser,
@@ -26,9 +26,9 @@ void runInstanceTests() {
         currentUser.isAnonymous, isFalse);
       expect(
         currentUser.uid,
-        equals(FirebaseAuth.instance.currentUser.uid));
+        equals(FirebaseAuth.instance.currentUser!.uid));
 
-      final additionalUserInfo = credential.additionalUserInfo;
+      final additionalUserInfo = credential.additionalUserInfo!;
 
       expect(
         additionalUserInfo,
@@ -40,8 +40,8 @@ void runInstanceTests() {
     }
 
     group('authStateChanges()', () {
-      StreamSubscription subscription;
-      StreamSubscription subscription2;
+      StreamSubscription? subscription;
+      StreamSubscription? subscription2;
 
       tearDown(() async {
         await subscription?.cancel();
@@ -58,7 +58,7 @@ void runInstanceTests() {
           () async {
         await ensureSignedIn(testEmail);
 
-        final uid = FirebaseAuth.instance.currentUser.uid;
+        final uid = FirebaseAuth.instance.currentUser!.uid;
 
         final stream = FirebaseAuth.instance.authStateChanges();
         int call = 0;
@@ -69,7 +69,7 @@ void runInstanceTests() {
               call++;
               if ( call == 1 ) {
                 expect(
-                  user.uid,
+                  user!.uid,
                   isA<String>());
                 expect(
                   user.uid,
@@ -79,7 +79,7 @@ void runInstanceTests() {
                   user, isNull); // logged out
               } else if ( call == 3 ) {
                 expect(
-                  user.uid,
+                  user!.uid,
                   isA<String>());
                 expect(
                   user.uid != uid, isTrue); // anonymous user
@@ -98,8 +98,8 @@ void runInstanceTests() {
     });
 
     group('idTokenChanges()', () {
-      StreamSubscription subscription;
-      StreamSubscription subscription2;
+      StreamSubscription? subscription;
+      StreamSubscription? subscription2;
 
       tearDown(() async {
         await subscription?.cancel();
@@ -116,7 +116,7 @@ void runInstanceTests() {
           () async {
         await ensureSignedIn(testEmail);
 
-        final uid = FirebaseAuth.instance.currentUser.uid;
+        final uid = FirebaseAuth.instance.currentUser!.uid;
 
         final stream = FirebaseAuth.instance.idTokenChanges();
         int call = 0;
@@ -127,14 +127,14 @@ void runInstanceTests() {
               call++;
               if ( call == 1 ) {
                 expect(
-                  user.uid,
+                  user!.uid,
                   equals(uid)); // initial user
               } else if ( call == 2 ) {
                 expect(
                   user, isNull); // logged out
               } else if ( call == 3 ) {
                 expect(
-                  user.uid,
+                  user!.uid,
                   isA<String>());
                 expect(
                   user.uid != uid, isTrue); // anonymous user
@@ -153,7 +153,7 @@ void runInstanceTests() {
     });
 
     group('userChanges()', () {
-      StreamSubscription subscription;
+      late StreamSubscription subscription;
 
       tearDown(() async {
         await subscription.cancel();
@@ -172,10 +172,10 @@ void runInstanceTests() {
               call++;
               if (call == 1) {
                 expect(
-                  user.displayName, isNull); // initial user
+                  user!.displayName, isNull); // initial user
               } else if (call == 2) {
                 expect(
-                  user.displayName,
+                  user!.displayName,
                   equals('updatedName')); // updated profile
               } else {
                 fail('Should not have been called');
@@ -185,12 +185,12 @@ void runInstanceTests() {
             reason: 'Stream should only have been called 2 times',
           ));
 
-        await FirebaseAuth.instance.currentUser
+        await FirebaseAuth.instance.currentUser!
             .updateProfile(displayName: 'updatedName');
 
-        await FirebaseAuth.instance.currentUser.reload();
+        await FirebaseAuth.instance.currentUser!.reload();
         expect(
-          FirebaseAuth.instance.currentUser.displayName,
+          FirebaseAuth.instance.currentUser!.displayName,
           equals('updatedName'));
       });
     });
@@ -268,7 +268,7 @@ void runInstanceTests() {
               newUserCredential.user,
               isA<User>());
 
-            final newUser = newUserCredential.user;
+            final newUser = newUserCredential.user!;
 
             expect(
               newUser.uid,
@@ -282,9 +282,9 @@ void runInstanceTests() {
               newUser.isAnonymous, isFalse);
             expect(
               newUser.uid,
-              equals(FirebaseAuth.instance.currentUser.uid));
+              equals(FirebaseAuth.instance.currentUser!.uid));
 
-            final additionalUserInfo = newUserCredential.additionalUserInfo;
+            final additionalUserInfo = newUserCredential.additionalUserInfo!;
 
             expect(
               additionalUserInfo,
@@ -422,9 +422,9 @@ void runInstanceTests() {
 
           await FirebaseAuth.instance
               .sendPasswordResetEmail(email: email);
-          await FirebaseAuth.instance.currentUser.delete();
+          await FirebaseAuth.instance.currentUser!.delete();
         } catch (e) {
-          await FirebaseAuth.instance.currentUser.delete();
+          await FirebaseAuth.instance.currentUser!.delete();
           fail(e.toString());
         }
       });
@@ -468,7 +468,7 @@ void runInstanceTests() {
         final oobCode = await emulatorOutOfBandCode(
           email, EmulatorOobCodeType.emailSignIn);
         expect(
-          oobCode, isNotNull);
+          oobCode!, isNotNull);
         expect(
           oobCode.email, email);
         expect(
@@ -476,7 +476,7 @@ void runInstanceTests() {
           EmulatorOobCodeType.emailSignIn);
 
         // Confirm the continue url was passed through to backend correctly.
-        final url = Uri.parse(oobCode.oobLink);
+        final url = Uri.parse(oobCode.oobLink!);
         expect(
           url.queryParameters['continueUrl'],
           Uri.encodeFull(continueUrl));
@@ -491,24 +491,6 @@ void runInstanceTests() {
           FirebaseAuth.instance.languageCode,
           equals('en'));
       });
-
-      test('should allow null value and default the device language code',
-          () async {
-        await FirebaseAuth.instance.setLanguageCode(null);
-
-        expect(
-          FirebaseAuth.instance.languageCode,
-          isNotNull); // default to the device language or the Firebase projects default language
-      },
-      skip: kIsWeb);
-
-      test('should allow null value and set to null', () async {
-        await FirebaseAuth.instance.setLanguageCode(null);
-
-        expect(
-          FirebaseAuth.instance.languageCode, null);
-      },
-      skip: !kIsWeb);
     });
 
     group('setPersistence()', () {
@@ -539,7 +521,7 @@ void runInstanceTests() {
         await FirebaseAuth.instance
           .signInAnonymously()
           .then((currentUserCredential) async {
-            final currentUser = currentUserCredential.user;
+            final currentUser = currentUserCredential.user!;
 
             expect(
               currentUser,
@@ -553,7 +535,7 @@ void runInstanceTests() {
               currentUser.isAnonymous, isTrue);
             expect(
               currentUser.uid,
-              equals(FirebaseAuth.instance.currentUser.uid));
+              equals(FirebaseAuth.instance.currentUser!.uid));
 
             final additionalUserInfo = currentUserCredential.additionalUserInfo;
 
@@ -646,7 +628,7 @@ void runInstanceTests() {
     group('signInWithCustomToken()', () {
       test('signs in with custom auth token', () async {
         final userCredential = await FirebaseAuth.instance.signInAnonymously();
-        final uid = userCredential.user.uid;
+        final uid = userCredential.user!.uid;
         final claims = {
           'roles': [
             {'role': 'member'},
@@ -665,23 +647,23 @@ void runInstanceTests() {
             await FirebaseAuth.instance.signInWithCustomToken(customToken);
 
         expect(
-          customTokenUserCredential.user.uid,
+          customTokenUserCredential.user!.uid,
           equals(uid));
         expect(
-          FirebaseAuth.instance.currentUser.uid,
+          FirebaseAuth.instance.currentUser!.uid,
           equals(uid));
 
         final idTokenResult =
-            await FirebaseAuth.instance.currentUser.getIdTokenResult();
+            await FirebaseAuth.instance.currentUser!.getIdTokenResult();
 
         expect(
-          idTokenResult.claims['roles'],
+          idTokenResult.claims!['roles'],
           isA<List>());
         expect(
-          idTokenResult.claims['roles'][0],
+          idTokenResult.claims!['roles'][0],
           isA<Map>());
         expect(
-          idTokenResult.claims['roles'][0]['role'], 'member');
+          idTokenResult.claims!['roles'][0]['role'], 'member');
       });
     });
 

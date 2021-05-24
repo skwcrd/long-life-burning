@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void runQueryTests() {
   group('$Query', () {
-    /*late*/ FirebaseFirestore firestore;
+    late FirebaseFirestore firestore;
 
     setUpAll(() async {
       firestore = FirebaseFirestore.instance;
@@ -1421,7 +1421,7 @@ void runQueryTests() {
             .where('value', isGreaterThan: 0)
             .withConverter<int>(
               fromFirestore: (snapshots, _) =>
-                  snapshots.data()['value'] as int,
+                  snapshots.data()!['value'] as int,
               toFirestore: (value, _) => {'value': value},
             );
 
@@ -1464,7 +1464,7 @@ void runQueryTests() {
         final collection = await initializeTest('foo');
 
         final converted = collection.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 
@@ -1505,7 +1505,7 @@ void runQueryTests() {
         final collection = await initializeTest('foo');
 
         final converted = collection.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 
@@ -1525,7 +1525,7 @@ void runQueryTests() {
         final collection = await initializeTest('foo');
 
         final converted = collection.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 
@@ -1547,7 +1547,7 @@ void runQueryTests() {
         final collection = await initializeTest('foo');
 
         final converted = collection.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 
@@ -1567,7 +1567,7 @@ void runQueryTests() {
         final collection = await initializeTest('foo');
 
         final converted = collection.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 
@@ -1591,7 +1591,7 @@ void runQueryTests() {
         final collection = await initializeTest('foo');
 
         final converted = collection.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 
@@ -1614,7 +1614,7 @@ void runQueryTests() {
         final collection = await initializeTest('foo');
 
         final converted = collection.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 
@@ -1641,7 +1641,7 @@ void runQueryTests() {
         final collection = await initializeTest('foo');
 
         final converted = collection.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 
@@ -1668,7 +1668,7 @@ void runQueryTests() {
         final collection = await initializeTest('foo');
 
         final converted = collection.withConverter<int>(
-          fromFirestore: (snapshots, _) => snapshots.data()['value'] as int,
+          fromFirestore: (snapshots, _) => snapshots.data()!['value'] as int,
           toFirestore: (value, _) => {'value': value},
         );
 

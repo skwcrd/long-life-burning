@@ -1,8 +1,8 @@
 part of controller;
 
 typedef _AuthErrorCallback = void Function(
-  Object error,
-  FirebaseAuthException exception,
+  Object? error,
+  FirebaseAuthException? exception,
   StackTrace stackTrace,
 );
 
@@ -11,9 +11,9 @@ class AuthController extends GetxController {
     : _user = Rxn<User>(),
       super();
 
-  final Rx<User> _user;
+  final Rx<User?> _user;
 
-  User get user => _user.value;
+  User? get user => _user.value;
 
   @override
   void onInit() {
@@ -29,9 +29,9 @@ class AuthController extends GetxController {
   }
 
   Future<bool> signin({
-    @required String email,
-    @required String password,
-    _AuthErrorCallback onError,
+    required String email,
+    required String password,
+    _AuthErrorCallback? onError,
     int timeout = 10,
   }) async {
     try {
@@ -64,10 +64,10 @@ class AuthController extends GetxController {
   }
 
   Future<bool> signup({
-    @required String email,
-    @required String password,
+    required String email,
+    required String password,
     String name = '',
-    _AuthErrorCallback onError,
+    _AuthErrorCallback? onError,
     int timeout = 10,
   }) async {
     try {
@@ -101,7 +101,7 @@ class AuthController extends GetxController {
   }
 
   Future<bool> signout({
-    _AuthErrorCallback onError,
+    _AuthErrorCallback? onError,
   }) async {
     try {
       await FirebaseService.auth.signout();

@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void runTransactionTests() {
   group('$Transaction', () {
-    /*late*/ FirebaseFirestore firestore;
+    late FirebaseFirestore firestore;
 
     setUpAll(() async {
       firestore = FirebaseFirestore.instance;
@@ -26,14 +26,14 @@ void runTransactionTests() {
           await initializeTest('with-converter-batch');
 
       final DocumentReference<int> doc = rawDoc.withConverter(
-        fromFirestore: (snapshot, options) => snapshot.data()['value'] as int,
+        fromFirestore: (snapshot, options) => snapshot.data()!['value'] as int,
         toFirestore: (value, options) => {'value': value});
 
       await doc.set(42);
 
       expect(
-        await firestore.runTransaction<int>((transaction) async {
-          final snapshot = await transaction.get<int>(doc);
+        await firestore.runTransaction<int?>((transaction) async {
+          final snapshot = await transaction.get<int?>(doc);
           return snapshot.data();
         }),
         42,
@@ -41,6 +41,8 @@ void runTransactionTests() {
 
       await firestore.runTransaction<void>((transaction) {
         transaction.set(doc, 21);
+
+        // ignore: return_without_value
         return;
       });
 
@@ -48,6 +50,8 @@ void runTransactionTests() {
 
       await firestore.runTransaction<void>((transaction) {
         transaction.update(doc, <String, dynamic>{'value': 0});
+
+        // ignore: return_without_value
         return;
       });
 
@@ -83,7 +87,7 @@ void runTransactionTests() {
       } catch (e) {
         final DocumentSnapshot<Map<String, dynamic>> snapshot =
             await documentReference.get();
-        expect(snapshot.data()['foo'], equals('bar'));
+        expect(snapshot.data()!['foo'], equals('bar'));
       }
     });
 
@@ -112,9 +116,9 @@ void runTransactionTests() {
       ]);
 
       final DocumentSnapshot<Map<String, dynamic>> snapshot1 = await doc1.get();
-      expect(snapshot1.data()['test'], equals('value3'));
+      expect(snapshot1.data()!['test'], equals('value3'));
       final DocumentSnapshot<Map<String, dynamic>> snapshot2 = await doc2.get();
-      expect(snapshot2.data()['test'], equals('value4'));
+      expect(snapshot2.data()!['test'], equals('value4'));
     });
 
     test('should abort if timeout is exceeded', () async {
@@ -229,15 +233,15 @@ void runTransactionTests() {
           final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
               await transaction.get(documentReference);
           transaction.update(documentReference, <String, dynamic>{
-            'bar': documentSnapshot.data()['bar'] + 1,
+            'bar': documentSnapshot.data()!['bar'] + 1,
           });
         });
 
         final DocumentSnapshot<Map<String, dynamic>> snapshot =
             await documentReference.get();
         expect(snapshot.exists, isTrue);
-        expect(snapshot.data()['bar'], equals(2));
-        expect(snapshot.data()['foo'], equals('bar'));
+        expect(snapshot.data()!['bar'], equals(2));
+        expect(snapshot.data()!['foo'], equals('bar'));
       });
     });
 
@@ -253,7 +257,7 @@ void runTransactionTests() {
           final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
               await transaction.get(documentReference);
           transaction.set(documentReference, <String, dynamic>{
-            'bar': documentSnapshot.data()['bar'] + 1,
+            'bar': documentSnapshot.data()!['bar'] + 1,
           });
         });
 
@@ -280,7 +284,7 @@ void runTransactionTests() {
           transaction.set(
             documentReference,
             <String, dynamic>{
-              'bar': documentSnapshot.data()['bar'] + 1,
+              'bar': documentSnapshot.data()!['bar'] + 1,
             },
             SetOptions(merge: true));
         });
@@ -288,8 +292,8 @@ void runTransactionTests() {
         final DocumentSnapshot<Map<String, dynamic>> snapshot =
             await documentReference.get();
         expect(snapshot.exists, isTrue);
-        expect(snapshot.data()['bar'], equals(2));
-        expect(snapshot.data()['foo'], equals('bar'));
+        expect(snapshot.data()!['bar'], equals(2));
+        expect(snapshot.data()!['foo'], equals('bar'));
       });
 
       test('merges fields a document with set', () async {
@@ -305,7 +309,7 @@ void runTransactionTests() {
           transaction.set(
               documentReference,
               <String, dynamic>{
-                'bar': documentSnapshot.data()['bar'] + 1,
+                'bar': documentSnapshot.data()!['bar'] + 1,
                 'baz': 'ben',
               },
               SetOptions(mergeFields: ['bar']));
@@ -337,7 +341,7 @@ void runTransactionTests() {
             await transaction.get(documentReference);
 
         transaction.set(documentReference, <String, dynamic>{
-          'foo': documentSnapshot.data()['foo'] + 1,
+          'foo': documentSnapshot.data()!['foo'] + 1,
         })
         ..update(documentReference, <String, dynamic>{'bar': 'baz'})
         ..delete(documentReference2);
