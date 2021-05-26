@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         applicationId "com.skwcrd.long_life_burning"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

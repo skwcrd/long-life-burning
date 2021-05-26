@@ -9,8 +9,8 @@ class _ErrorService {
   Future<void> init({ bool debugMode = false }) async {
     /// You could additionally extend this to allow users to opt-in.
     ///
-    /// Force enable Crashlytics and Analytics collection
-    /// while doing every day development in non-debug builds.
+    /// Force enable crashlytics collection while doing every day
+    /// development in non-debug builds.
     ///
     /// Temporarily toggle this to true
     /// if you want to test crash reporting in your app.

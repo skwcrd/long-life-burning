@@ -6,7 +6,12 @@ class NavBarModel {
     required this.route,
     String? title,
     IconData? icon,
+    ValueChanged<Routing?>? routingCallback,
   }) :  id = route.id,
+        observers = <NavigatorObserver>[
+          FirebaseService.observer,
+          GetObserver(routingCallback, Get.routing),
+        ],
         item = BottomNavigationBarItem(
           icon: Icon(icon),
           label: title ?? label);
@@ -14,6 +19,7 @@ class NavBarModel {
   final int id;
   final String label;
   final AppRoute route;
+  final List<NavigatorObserver> observers;
   final BottomNavigationBarItem item;
 
   @override

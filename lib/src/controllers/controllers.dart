@@ -71,7 +71,8 @@ class AppController extends GetxController {
     super.onInit();
     /// The application's top-level routing table.
     /// [routes] routing other pages in application.
-    /// can edit [routeName] in class define on page class.
+    /// can edit [routeName] in class define on page
+    /// class.
     Get.addPages([
       for ( final _nav in _navigator )
         ..._nav.route.pages,
@@ -98,6 +99,7 @@ class AppController extends GetxController {
             /// if a [Navigator] is built.
             /// (start with index page)
             initialRoute: _navigator[i].route.index,
+            observers: _navigator[i].observers,
             onGenerateRoute: (settings) => PageRedirect(
               settings, null).page<Object>(),
             onGenerateInitialRoutes: (navigator, initialRoute) => [

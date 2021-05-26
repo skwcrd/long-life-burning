@@ -46,9 +46,6 @@ class MobileApp extends StatelessWidget {
       },
       // onDispose: () {},
       title: AppText.app,
-      navigatorObservers: <NavigatorObserver>[
-        FirebaseService.observer,
-      ],
       /// Initial setting application theme
       /// [Brightness, Colors, TextTheme, AppBarTheme]
       /// [TextTheme] set at headline4 or display1

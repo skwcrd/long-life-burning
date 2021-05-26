@@ -5,7 +5,6 @@ import 'dart:async'
 
 import 'package:flutter/foundation.dart'
   show
-    // debugPrint,
     FlutterError,
     ErrorDescription,
     TextTreeRenderer,
@@ -63,28 +62,34 @@ class FirebaseService {
   // static _DatabaseService get db =>
   //     _db ??= _DatabaseService._();
 
-  static FirebaseAnalyticsObserver? _observer;
+  static FirebaseAnalytics? _analytics;
 
   /// Singleton instance of FirebaseAnalyticsObserver.
   static FirebaseAnalyticsObserver get observer =>
-    _observer ??= FirebaseAnalyticsObserver(
-      analytics: FirebaseAnalytics(),
-      onError: (err) {
-        FlutterError.reportError(
-          error.getErrorDetails(
-            message: err.message ?? '',
-            error: err,
-            stack: StackTrace.fromString(
-              err.stacktrace ?? ''),
-          ));
-      },
-    );
+      FirebaseAnalyticsObserver(
+        analytics: analytics,
+        onError: (err) {
+          FlutterError.reportError(
+            error.getErrorDetails(
+              message: err.message ?? '',
+              error: err,
+              stack: StackTrace.fromString(
+                err.stacktrace ?? ''),
+            ));
+        },
+      );
 
   /// Singleton instance of FirebaseAnalytics.
-  static FirebaseAnalytics get analytic =>
-      observer.analytics;
+  static FirebaseAnalytics get analytics =>
+      _analytics ??= FirebaseAnalytics();
 
   Future<void> initial({ bool debugMode = false }) async {
+    /// You could additionally extend this to allow users to opt-in.
+    ///
+    /// Force enable analytics collection while doing every day
+    /// development in non-debug builds.
+    analytics.setAnalyticsCollectionEnabled(!debugMode);
+
     await error.init(
       debugMode: debugMode);
   }
