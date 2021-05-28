@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/controllers.dart'
-  show AppController;
+  show
+    EventBinding,
+    EventController;
 import '../views.dart'
   show AppRoute;
 
 part 'test.dart';
 part 'route.dart';
 
-class EventView extends GetView<AppController> {
+class EventView extends GetView<EventController> {
   /// The event page in app.
   const EventView({ Key? key }) : super(key: key);
 

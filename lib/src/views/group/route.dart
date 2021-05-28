@@ -8,6 +8,7 @@ class GroupRoute extends AppRoute {
     GetPage<Object>(
       name: _group,
       page: () => const GroupView(),
+      binding: GroupBinding(),
     ),
     GetPage<Object>(
       name: test,

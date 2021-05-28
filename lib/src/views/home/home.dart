@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/controllers.dart'
-  show AppController;
+  show
+    HomeBinding,
+    HomeController;
 import '../views.dart'
   show AppRoute;
 
 part 'test.dart';
 part 'route.dart';
 
-class HomeView extends GetView<AppController> {
+class HomeView extends GetView<HomeController> {
   /// The home page in app.
   const HomeView({ Key? key }) : super(key: key);
 

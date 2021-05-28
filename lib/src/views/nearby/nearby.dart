@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/controllers.dart'
-  show AppController;
+  show
+    NearbyBinding,
+    NearbyController;
 import '../views.dart'
   show AppRoute;
 
 part 'test.dart';
 part 'route.dart';
 
-class NearbyView extends GetView<AppController> {
+class NearbyView extends GetView<NearbyController> {
   /// The nearby page in app.
   const NearbyView({ Key? key }) : super(key: key);
 

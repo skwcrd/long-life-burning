@@ -8,6 +8,7 @@ class MenuRoute extends AppRoute {
     GetPage<Object>(
       name: _menu,
       page: () => const MenuView(),
+      binding: MenuBinding(),
     ),
     GetPage<Object>(
       name: test,

@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/controllers.dart'
-  show AppController;
+  show
+    GroupBinding,
+    GroupController;
 import '../views.dart'
   show AppRoute;
 
 part 'test.dart';
 part 'route.dart';
 
-class GroupView extends GetView<AppController> {
+class GroupView extends GetView<GroupController> {
   /// The group page in app.
   const GroupView({ Key? key }) : super(key: key);
 

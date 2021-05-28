@@ -8,6 +8,7 @@ class HomeRoute extends AppRoute {
     GetPage<Object>(
       name: _home,
       page: () => const HomeView(),
+      binding: HomeBinding(),
     ),
     GetPage<Object>(
       name: test,

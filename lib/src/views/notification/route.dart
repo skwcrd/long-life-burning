@@ -8,7 +8,7 @@ class NotifyRoute extends AppRoute {
     GetPage<Object>(
       name: _notify,
       page: () => const NotifyView(),
-      transition: Transition.fadeIn,
+      binding: NotifyBinding(),
     ),
     GetPage<Object>(
       name: test,

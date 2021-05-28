@@ -38,7 +38,8 @@ class AuthController extends GetxController {
       await FirebaseService.auth
         .signin(
           email: email,
-          password: password);
+          password: password,
+          timeout: timeout);
 
       return true;
     } on FirebaseAuthException catch (error, stackTrace) {
@@ -75,7 +76,8 @@ class AuthController extends GetxController {
         .signup(
           name: name,
           email: email,
-          password: password);
+          password: password,
+          timeout: timeout);
 
       return true;
     } on FirebaseAuthException catch (error, stackTrace) {

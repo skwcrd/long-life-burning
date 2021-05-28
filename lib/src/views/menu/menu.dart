@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/controllers.dart'
-  show AppController;
+  show
+    MenuBinding,
+    MenuController;
 import '../views.dart'
   show AppRoute;
 
 part 'test.dart';
 part 'route.dart';
 
-class MenuView extends GetView<AppController> {
+class MenuView extends GetView<MenuController> {
   /// The notification page in app.
   const MenuView({ Key? key }) : super(key: key);
 

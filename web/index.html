@@ -15,6 +15,7 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Application community for workout. Supported both Android and iOS. Bachelor's Degree Project (Thesis).">
 
   <!-- iOS meta tags & icons -->
@@ -30,6 +31,27 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+
+  <!--
+    TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries
+  -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-functions.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-storage.js"></script>
+
+  <!--
+    Initialize Firebase
+    initialize the SDK after all desired features are loaded, set useEmulator to false
+    to avoid connecting the SDK to running emulators.
+  -->
+  <script src="firebase-config.js"></script>
+
   <!--
     This script installs service_worker.js to provide PWA functionality to
     application. For more information, see:
@@ -42,6 +64,7 @@
       });
     }
   </script>
+
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

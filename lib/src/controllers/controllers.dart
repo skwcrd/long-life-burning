@@ -13,8 +13,20 @@ import '../views/views.dart'
   show AppRoute;
 
 part 'auth.dart';
+part 'event.dart';
+part 'group.dart';
+part 'home.dart';
+part 'menu.dart';
+part 'nearby.dart';
+part 'notification.dart';
 
 part 'bindings/bindings.dart';
+part 'bindings/event.dart';
+part 'bindings/group.dart';
+part 'bindings/home.dart';
+part 'bindings/menu.dart';
+part 'bindings/nearby.dart';
+part 'bindings/notification.dart';
 
 class AppController extends GetxController {
   AppController._()

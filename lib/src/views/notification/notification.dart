@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/controllers.dart'
-  show AppController;
+  show
+    NotifyBinding,
+    NotifyController;
 import '../views.dart'
   show AppRoute;
 
 part 'test.dart';
 part 'route.dart';
 
-class NotifyView extends GetView<AppController> {
+class NotifyView extends GetView<NotifyController> {
   /// The notification page in app.
   const NotifyView({ Key? key }) : super(key: key);
 

@@ -8,6 +8,7 @@ class NearbyRoute extends AppRoute {
     GetPage<Object>(
       name: _nearby,
       page: () => const NearbyView(),
+      binding: NearbyBinding(),
     ),
     GetPage<Object>(
       name: test,

@@ -8,6 +8,7 @@ class EventRoute extends AppRoute {
     GetPage<Object>(
       name: _event,
       page: () => const EventView(),
+      binding: EventBinding(),
     ),
     GetPage<Object>(
       name: test,
