@@ -43,20 +43,40 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSMotionUsageDescription</key>
-	<string>This application tracks your steps</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>This application sync your data with the Apple Health app to give you better insights</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>This application sync your data with the Apple Health app to give you better insights</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This application access to location when open.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This application access to location when in the background.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
+	<key>NSMotionUsageDescription</key>
+	<string>This application tracks your steps</string>
+
+	<!-- Health Section -->
+	<key>NSHealthShareUsageDescription</key>
+	<string>This application sync your data with the Apple Health app to give you better insights</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>This application sync your data with the Apple Health app to give you better insights</string>
+	<!-- End of the Health Section -->
+
+	<!-- Location Section -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This application access to location when open.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This application access to location when in the background.</string>
+	<!-- End of the Location Section -->
+
+	<!-- Google Sign-in Section -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.939280072246-vtsd5vbta19pl0c94diruvt3jho88is5</string>
+			</array>
+		</dict>
+	</array>
+	<!-- End of the Google Sign-in Section -->
 </dict>
 </plist>

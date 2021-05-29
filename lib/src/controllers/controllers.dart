@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/models.dart';
+import '../services/authentication/authentication.dart';
 import '../services/firebase/firebase.dart';
 import '../utils/utils.dart'
   show AppIcon;

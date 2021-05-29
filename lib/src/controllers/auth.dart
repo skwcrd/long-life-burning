@@ -19,7 +19,7 @@ class AuthController extends GetxController {
   void onInit() {
     super.onInit();
     _user.bindStream(
-      FirebaseService.auth.authStateChanges);
+      AuthService.instance.authStateChanges);
   }
 
   @override
@@ -35,7 +35,7 @@ class AuthController extends GetxController {
     int timeout = 10,
   }) async {
     try {
-      await FirebaseService.auth
+      await AuthService.instance
         .signin(
           email: email,
           password: password,
@@ -64,6 +64,70 @@ class AuthController extends GetxController {
     return false;
   }
 
+  Future<bool> signInWithGoogle({
+    _AuthErrorCallback? onError,
+    int timeout = 10,
+  }) async {
+    try {
+      await AuthService.instance
+        .signInWithGoogle(
+          timeout: timeout);
+
+      return true;
+    } on FirebaseAuthException catch (error, stackTrace) {
+      FirebaseService.error.exception(
+        message: "Failed at google signin with error "
+          "code: ${error.code} and message: ${error.message}.",
+        error: error,
+        stack: stackTrace);
+
+      onError?.call(
+        null, error, stackTrace);
+    } catch (error, stackTrace) {
+      FirebaseService.error.exception(
+        message: "The google signin method has something wrong.",
+        error: error,
+        stack: stackTrace);
+
+      onError?.call(
+        error, null, stackTrace);
+    }
+
+    return false;
+  }
+
+  Future<bool> signInWithAppleID({
+    _AuthErrorCallback? onError,
+    int timeout = 10,
+  }) async {
+    try {
+      await AuthService.instance
+        .signInWithAppleID(
+          timeout: timeout);
+
+      return true;
+    } on FirebaseAuthException catch (error, stackTrace) {
+      FirebaseService.error.exception(
+        message: "Failed at apple signin with error "
+          "code: ${error.code} and message: ${error.message}.",
+        error: error,
+        stack: stackTrace);
+
+      onError?.call(
+        null, error, stackTrace);
+    } catch (error, stackTrace) {
+      FirebaseService.error.exception(
+        message: "The apple signin method has something wrong.",
+        error: error,
+        stack: stackTrace);
+
+      onError?.call(
+        error, null, stackTrace);
+    }
+
+    return false;
+  }
+
   Future<bool> signup({
     required String email,
     required String password,
@@ -72,7 +136,7 @@ class AuthController extends GetxController {
     int timeout = 10,
   }) async {
     try {
-      await FirebaseService.auth
+      await AuthService.instance
         .signup(
           name: name,
           email: email,
@@ -106,7 +170,7 @@ class AuthController extends GetxController {
     _AuthErrorCallback? onError,
   }) async {
     try {
-      await FirebaseService.auth.signout();
+      await AuthService.instance.signout();
 
       return true;
     } on FirebaseAuthException catch (error, stackTrace) {

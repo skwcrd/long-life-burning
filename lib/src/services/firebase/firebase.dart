@@ -16,10 +16,6 @@ import 'package:get/get.dart'
 
 import 'package:firebase_analytics/observer.dart'
   show FirebaseAnalyticsObserver;
-import 'package:firebase_auth/firebase_auth.dart'
-  show
-    User,
-    FirebaseAuth;
 // import 'package:cloud_firestore/cloud_firestore.dart'
 //   show FirebaseFirestore;
 import 'package:firebase_analytics/firebase_analytics.dart'
@@ -31,7 +27,6 @@ import '../../utils/utils.dart'
   show AppText;
 
 part 'db.dart';
-part 'auth.dart';
 part 'error.dart';
 
 class FirebaseService {
@@ -43,12 +38,6 @@ class FirebaseService {
   // ignore: prefer_constructors_over_static_methods
   static FirebaseService get instance =>
       _instance ??= FirebaseService._();
-
-  static _AuthService? _auth;
-
-  /// Singleton instance of AuthService.
-  static _AuthService get auth =>
-      _auth ??= _AuthService._();
 
   static _ErrorService? _error;
 
