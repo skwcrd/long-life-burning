@@ -43,7 +43,7 @@ class AuthController extends GetxController {
 
       return true;
     } on FirebaseAuthException catch (error, stackTrace) {
-      FirebaseService.error.exception(
+      ReportService.error.exception(
         message: "Failed at signin with error "
           "code: ${error.code} and message: ${error.message}.",
         error: error,
@@ -52,7 +52,7 @@ class AuthController extends GetxController {
       onError?.call(
         null, error, stackTrace);
     } catch (error, stackTrace) {
-      FirebaseService.error.exception(
+      ReportService.error.exception(
         message: "The signin method has something wrong.",
         error: error,
         stack: stackTrace);
@@ -75,7 +75,7 @@ class AuthController extends GetxController {
 
       return true;
     } on FirebaseAuthException catch (error, stackTrace) {
-      FirebaseService.error.exception(
+      ReportService.error.exception(
         message: "Failed at google signin with error "
           "code: ${error.code} and message: ${error.message}.",
         error: error,
@@ -84,7 +84,7 @@ class AuthController extends GetxController {
       onError?.call(
         null, error, stackTrace);
     } catch (error, stackTrace) {
-      FirebaseService.error.exception(
+      ReportService.error.exception(
         message: "The google signin method has something wrong.",
         error: error,
         stack: stackTrace);
@@ -107,7 +107,7 @@ class AuthController extends GetxController {
 
       return true;
     } on FirebaseAuthException catch (error, stackTrace) {
-      FirebaseService.error.exception(
+      ReportService.error.exception(
         message: "Failed at apple signin with error "
           "code: ${error.code} and message: ${error.message}.",
         error: error,
@@ -116,7 +116,7 @@ class AuthController extends GetxController {
       onError?.call(
         null, error, stackTrace);
     } catch (error, stackTrace) {
-      FirebaseService.error.exception(
+      ReportService.error.exception(
         message: "The apple signin method has something wrong.",
         error: error,
         stack: stackTrace);
@@ -145,7 +145,7 @@ class AuthController extends GetxController {
 
       return true;
     } on FirebaseAuthException catch (error, stackTrace) {
-      FirebaseService.error.exception(
+      ReportService.error.exception(
         message: "Failed at signup with error "
           "code: ${error.code} and message: ${error.message}.",
         error: error,
@@ -154,7 +154,7 @@ class AuthController extends GetxController {
       onError?.call(
         null, error, stackTrace);
     } catch (error, stackTrace) {
-      FirebaseService.error.exception(
+      ReportService.error.exception(
         message: "The signup method has something wrong.",
         error: error,
         stack: stackTrace);
@@ -174,7 +174,7 @@ class AuthController extends GetxController {
 
       return true;
     } on FirebaseAuthException catch (error, stackTrace) {
-      FirebaseService.error.exception(
+      ReportService.error.exception(
         message: "Failed at signout with error "
           "code: ${error.code} and message: ${error.message}.",
         error: error,
@@ -183,7 +183,7 @@ class AuthController extends GetxController {
       onError?.call(
         null, error, stackTrace);
     } catch (error, stackTrace) {
-      FirebaseService.error.exception(
+      ReportService.error.exception(
         message: "The signout method has something wrong.",
         error: error,
         stack: stackTrace);

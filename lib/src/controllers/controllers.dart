@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/models.dart';
 import '../services/authentication/authentication.dart';
-import '../services/firebase/firebase.dart';
+import '../services/report/report.dart';
 import '../utils/utils.dart'
   show AppIcon;
 import '../views/views.dart'

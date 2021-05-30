@@ -33,10 +33,9 @@ dependencies:
   # Stage management
   get: ^4.1.4
 
-  # Firebase
+  # Report
   firebase_analytics: ^8.1.0
   firebase_crashlytics: ^2.0.4
-  cloud_firestore: ^2.2.0
 
   # Authentication
   crypto: ^3.0.1
@@ -53,6 +52,7 @@ dependencies:
   # Database
   # sqflite: ^2.0.0+3
   get_storage: ^2.0.2
+  cloud_firestore: ^2.2.0
   # shared_preferences: ^2.0.5
 
   # Map

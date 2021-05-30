@@ -23,8 +23,7 @@ import 'package:get/get.dart'
 //     GeoPoint,
 //     Timestamp;
 
-import '../services/firebase/firebase.dart'
-  show FirebaseService;
+import '../services/report/report.dart';
 import '../utils/utils.dart';
 import '../views/views.dart'
   show AppRoute;

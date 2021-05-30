@@ -17,7 +17,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart'
     SignInWithApple,
     AppleIDAuthorizationScopes;
 
-import '../firebase/firebase.dart';
+import '../report/report.dart';
 
 part 'apple.dart';
 part 'google.dart';
@@ -80,7 +80,7 @@ class AuthService {
         .timeout(
           Duration(seconds: timeout),
           onTimeout: () {
-            throw FirebaseService.error.onTimeout(
+            throw ReportService.error.onTimeout(
               message: "FirebaseAuth cannot signin",
               duration: Duration(seconds: timeout),
               stack: StackTrace.current);
@@ -94,7 +94,7 @@ class AuthService {
         .timeout(
           Duration(seconds: timeout),
           onTimeout: () {
-            throw FirebaseService.error.onTimeout(
+            throw ReportService.error.onTimeout(
               message: "FirebaseAuth cannot signin with google",
               duration: Duration(seconds: timeout),
               stack: StackTrace.current);
@@ -108,7 +108,7 @@ class AuthService {
         .timeout(
           Duration(seconds: timeout),
           onTimeout: () {
-            throw FirebaseService.error.onTimeout(
+            throw ReportService.error.onTimeout(
               message: "FirebaseAuth cannot signin with apple id",
               duration: Duration(seconds: timeout),
               stack: StackTrace.current);
@@ -140,7 +140,7 @@ class AuthService {
       .timeout(
         Duration(seconds: timeout),
         onTimeout: () {
-          throw FirebaseService.error.onTimeout(
+          throw ReportService.error.onTimeout(
             message: "FirebaseAuth cannot signup",
             duration: Duration(seconds: timeout),
             stack: StackTrace.current);

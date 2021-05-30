@@ -1,4 +1,4 @@
-part of service.firebase;
+part of service.report;
 
 class _ErrorService {
   _ErrorService._()

@@ -9,7 +9,7 @@ class NavBarModel {
     ValueChanged<Routing?>? routingCallback,
   }) :  id = route.id,
         observers = <NavigatorObserver>[
-          FirebaseService.observer,
+          ReportService.instance.observer,
           GetObserver(routingCallback, Get.routing),
         ],
         item = BottomNavigationBarItem(

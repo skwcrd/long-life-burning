@@ -11,8 +11,7 @@ import 'package:get/get.dart'
 
 import 'controllers/controllers.dart'
   show AppBinding;
-import 'services/firebase/firebase.dart'
-  show FirebaseService;
+import 'services/report/report.dart';
 import 'utils/utils.dart'
   show
     AppText,
@@ -41,7 +40,7 @@ class MobileApp extends StatelessWidget {
       },
       initialBinding: AppBinding(),
       onInit: () async {
-        await FirebaseService.instance
+        await ReportService.instance
           .initial(debugMode: kDebugMode);
       },
       // onDispose: () {},

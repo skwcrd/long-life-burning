@@ -1,4 +1,4 @@
-library service.firebase;
+library service.report;
 
 import 'dart:async'
   show TimeoutException;
@@ -16,8 +16,6 @@ import 'package:get/get.dart'
 
 import 'package:firebase_analytics/observer.dart'
   show FirebaseAnalyticsObserver;
-// import 'package:cloud_firestore/cloud_firestore.dart'
-//   show FirebaseFirestore;
 import 'package:firebase_analytics/firebase_analytics.dart'
   show FirebaseAnalytics;
 import 'package:firebase_crashlytics/firebase_crashlytics.dart'
@@ -26,18 +24,17 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart'
 import '../../utils/utils.dart'
   show AppText;
 
-part 'db.dart';
 part 'error.dart';
 
-class FirebaseService {
-  FirebaseService._();
+class ReportService {
+  ReportService._();
 
-  static FirebaseService? _instance;
+  static ReportService? _instance;
 
-  /// Singleton instance of FirebaseService.
+  /// Singleton instance of ReportService.
   // ignore: prefer_constructors_over_static_methods
-  static FirebaseService get instance =>
-      _instance ??= FirebaseService._();
+  static ReportService get instance =>
+      _instance ??= ReportService._();
 
   static _ErrorService? _error;
 
@@ -45,16 +42,14 @@ class FirebaseService {
   static _ErrorService get error =>
       _error ??= _ErrorService._();
 
-  // static _DatabaseService? _db;
-
-  /// Singleton instance of DatabaseService.
-  // static _DatabaseService get db =>
-  //     _db ??= _DatabaseService._();
-
   static FirebaseAnalytics? _analytics;
 
+  /// Singleton instance of FirebaseAnalytics.
+  static FirebaseAnalytics get analytics =>
+      _analytics ??= FirebaseAnalytics();
+
   /// Singleton instance of FirebaseAnalyticsObserver.
-  static FirebaseAnalyticsObserver get observer =>
+  FirebaseAnalyticsObserver get observer =>
       FirebaseAnalyticsObserver(
         analytics: analytics,
         onError: (err) {
@@ -67,10 +62,6 @@ class FirebaseService {
             ));
         },
       );
-
-  /// Singleton instance of FirebaseAnalytics.
-  static FirebaseAnalytics get analytics =>
-      _analytics ??= FirebaseAnalytics();
 
   Future<void> initial({ bool debugMode = false }) async {
     /// You could additionally extend this to allow users to opt-in.
