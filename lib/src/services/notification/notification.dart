@@ -1,48 +1,120 @@
 library service.notification;
 
-// import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:typed_data'
+  show
+    Int32List,
+    Int64List;
+import 'dart:ui'
+  show Color;
+
+import 'package:firebase_messaging/firebase_messaging.dart'
+  show
+    RemoteMessage,
+    FirebaseMessaging,
+    NotificationSettings;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import '../../utils/utils.dart'
+  show InstanceException;
 
 part 'cloud.dart';
 part 'local.dart';
 
-const String _kThreadIdentifier =
-    'com.skwcrd.long_life_burning.ios.threadIdentifier';
-
-const String _kChannelId =
-    'com.skwcrd.long_life_burning.notifyChannel';
-const String _kChannelName =
-    'Long Life Burning';
-const String _kChannelDescription =
-    'Application community for workout';
+Future<void> _fetchMessageOnBackgroundHandler(RemoteMessage message) async {
+}
 
 class NotifyService {
-  NotifyService._(this._cloud, this._local);
+  NotifyService._(this._cloud, this._local) {
+    _initialized = true;
+  }
 
+  static bool _initialized = false;
   static NotifyService? _instance;
 
-  /// Singleton instance of DatabaseService.
+  /// Singleton instance of NotifyService.
   // ignore: prefer_constructors_over_static_methods
-  static NotifyService? get instance => _instance;
+  static NotifyService get instance {
+    if ( _instance == null ) {
+      throw InstanceException(
+        className: 'NotifyService',
+        message: 'Please called [NotifyService.init] before get instance this class');
+    }
+
+    return _instance!;
+  }
 
   final _CloudNotifyService _cloud;
   final _LocalNotifyService? _local;
 
   static Future<NotifyService> init({
-    String? channelId,
-    String? channelName,
-    String? channelDescription,
+    String defaultAndroidIcon = 'ic_launcher',
+    bool? autoInitEnabled,
+    bool alert = true,
+    bool announcement = false,
+    bool badge = true,
+    bool carPlay = false,
+    bool criticalAlert = false,
+    bool provisional = false,
+    bool sound = true,
+    bool requestAlertPermission = true,
+    bool requestSoundPermission = true,
+    bool requestBadgePermission = true,
+    bool defaultPresentAlert = true,
+    bool defaultPresentSound = true,
+    bool defaultPresentBadge = true,
     SelectNotificationCallback? onSelectNotification,
     DidReceiveLocalNotificationCallback? onDidReceiveLocalNotification,
-  }) =>
-      _LocalNotifyService
-        ._init(
-          channelId: channelId,
-          channelName: channelName,
-          channelDescription: channelDescription,
-          onSelectNotification: onSelectNotification,
-          onDidReceiveLocalNotification: onDidReceiveLocalNotification)
-        .then(
-          (value) => _instance ??= NotifyService._(
-            _CloudNotifyService._(), value));
+  }) async {
+    if ( !_initialized ) {
+      FirebaseMessaging.onBackgroundMessage(
+        _fetchMessageOnBackgroundHandler);
+
+      final _cloud = await _CloudNotifyService._init(
+        autoInitEnabled: autoInitEnabled,
+        alert: alert,
+        announcement: announcement,
+        badge: badge,
+        carPlay: carPlay,
+        criticalAlert: criticalAlert,
+        provisional: provisional,
+        sound: sound);
+
+      final _local = await _LocalNotifyService._init(
+        defaultAndroidIcon: defaultAndroidIcon,
+        requestAlertPermission: requestAlertPermission,
+        requestSoundPermission: requestSoundPermission,
+        requestBadgePermission: requestBadgePermission,
+        defaultPresentAlert: defaultPresentAlert,
+        defaultPresentSound: defaultPresentSound,
+        defaultPresentBadge: defaultPresentBadge,
+        onSelectNotification: onSelectNotification,
+        onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+
+      _instance = NotifyService._(_cloud, _local);
+    }
+
+    return _instance!;
+  }
+
+  Future<String?> getToken({ String? vapidKey }) =>
+      _cloud.getToken(vapidKey: vapidKey);
+
+  Stream<String> get token => _cloud.token;
+  Stream<RemoteMessage> get message => _cloud.message;
+  Stream<RemoteMessage> get messageOpenedApp => _cloud.messageOpenedApp;
+
+  Future<void> show({
+    required int id,
+    String? title,
+    String? body,
+    NotificationDetails? details,
+    String? payload,
+  }) async {
+    await _local?.show(
+      id: id,
+      title: title,
+      body: body,
+      details: details,
+      payload: payload);
+  }
 }

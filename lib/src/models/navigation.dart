@@ -9,7 +9,7 @@ class NavBarModel {
     ValueChanged<Routing?>? routingCallback,
   }) :  id = route.id,
         observers = <NavigatorObserver>[
-          ReportService.instance.observer,
+          ReportService.observer,
           GetObserver(routingCallback, Get.routing),
         ],
         item = BottomNavigationBarItem(

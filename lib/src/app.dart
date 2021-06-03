@@ -11,7 +11,6 @@ import 'package:get/get.dart'
 
 import 'controllers/controllers.dart'
   show AppBinding;
-import 'services/report/report.dart';
 import 'utils/utils.dart'
   show
     AppText,
@@ -39,10 +38,7 @@ class MobileApp extends StatelessWidget {
         }
       },
       initialBinding: AppBinding(),
-      onInit: () async {
-        await ReportService.instance
-          .initial(debugMode: kDebugMode);
-      },
+      // onInit: () {},
       // onDispose: () {},
       title: AppText.app,
       /// Initial setting application theme

@@ -11,7 +11,7 @@ class MapService {
 
   static MapService? _instance;
 
-  /// Singleton instance of DatabaseService.
+  /// Singleton instance of MapService.
   // ignore: prefer_constructors_over_static_methods
   static MapService get instance =>
       _instance ??= MapService._();

@@ -22,19 +22,31 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart'
   show FirebaseCrashlytics;
 
 import '../../utils/utils.dart'
-  show AppText;
+  show
+    AppText,
+    InstanceException;
 
 part 'error.dart';
 
 class ReportService {
-  ReportService._();
+  ReportService._() {
+    _initialized = true;
+  }
 
+  static bool _initialized = false;
   static ReportService? _instance;
 
   /// Singleton instance of ReportService.
   // ignore: prefer_constructors_over_static_methods
-  static ReportService get instance =>
-      _instance ??= ReportService._();
+  static ReportService get instance {
+    if ( _instance == null ) {
+      throw InstanceException(
+        className: 'ReportService',
+        message: 'Please called [ReportService.init] before get instance this class');
+    }
+
+    return _instance!;
+  }
 
   static _ErrorService? _error;
 
@@ -49,7 +61,7 @@ class ReportService {
       _analytics ??= FirebaseAnalytics();
 
   /// Singleton instance of FirebaseAnalyticsObserver.
-  FirebaseAnalyticsObserver get observer =>
+  static FirebaseAnalyticsObserver get observer =>
       FirebaseAnalyticsObserver(
         analytics: analytics,
         onError: (err) {
@@ -60,17 +72,22 @@ class ReportService {
               stack: StackTrace.fromString(
                 err.stacktrace ?? ''),
             ));
-        },
-      );
+        });
 
-  Future<void> initial({ bool debugMode = false }) async {
-    /// You could additionally extend this to allow users to opt-in.
-    ///
-    /// Force enable analytics collection while doing every day
-    /// development in non-debug builds.
-    analytics.setAnalyticsCollectionEnabled(!debugMode);
+  static Future<ReportService> init({ bool debugMode = false }) async {
+    if ( !_initialized ) {
+      /// You could additionally extend this to allow users to opt-in.
+      ///
+      /// Force enable analytics collection while doing every day
+      /// development in non-debug builds.
+      await analytics.setAnalyticsCollectionEnabled(!debugMode);
 
-    await error.init(
-      debugMode: debugMode);
+      await error._init(
+        debugMode: debugMode);
+
+      _instance = ReportService._();
+    }
+
+    return _instance!;
   }
 }

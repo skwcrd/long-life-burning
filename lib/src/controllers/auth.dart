@@ -11,7 +11,7 @@ class AuthController extends GetxController {
     : _user = Rxn<User>(),
       super();
 
-  final Rx<User?> _user;
+  final Rxn<User> _user;
 
   User? get user => _user.value;
 

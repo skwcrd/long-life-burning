@@ -14,3 +14,6 @@ part 'assets/images.dart';
 part 'enums/event.dart';
 part 'enums/group.dart';
 part 'enums/province.dart';
+
+part 'error/error.dart';
+part 'error/exception.dart';

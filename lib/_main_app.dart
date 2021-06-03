@@ -14,14 +14,13 @@ import 'package:flutter/widgets.dart'
     WidgetsFlutterBinding;
 import 'package:flutter/foundation.dart'
   show
+    kDebugMode,
     FlutterError,
     ErrorDescription,
     FlutterErrorDetails;
 
-import 'package:firebase_core/firebase_core.dart'
-  show Firebase;
-
 import 'src/app.dart';
+import 'src/services/services.dart';
 import 'src/utils/utils.dart'
   show AppText;
 
@@ -39,12 +38,12 @@ void run() {
         statusBarColor: Colors.transparent,
       ),
     );
-    SystemChrome.setPreferredOrientations([
+    await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
 
-    /// Wait for Firebase to initialize.
-    await Firebase.initializeApp();
+    await AppService.init(
+      debugMode: kDebugMode);
 
     runApp(const MobileApp());
   }, (error, stackTrace) {

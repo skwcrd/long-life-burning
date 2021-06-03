@@ -6,7 +6,7 @@ class _ErrorService {
 
   final FirebaseCrashlytics _crashlytic;
 
-  Future<void> init({ bool debugMode = false }) async {
+  Future<void> _init({ bool debugMode = false }) async {
     /// You could additionally extend this to allow users to opt-in.
     ///
     /// Force enable crashlytics collection while doing every day

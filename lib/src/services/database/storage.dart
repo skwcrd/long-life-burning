@@ -10,7 +10,8 @@ class _StorageService {
         .init(container)
         .then(
           (value) => value
-            ? _StorageService._(GetStorage(container))
+            ? _StorageService._(
+                GetStorage(container))
             : null);
 
   final GetStorage _db;

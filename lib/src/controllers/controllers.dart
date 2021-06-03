@@ -1,12 +1,21 @@
 library controller;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart'
+  show
+    User,
+    FirebaseAuthException;
+import 'package:firebase_messaging/firebase_messaging.dart'
+  show RemoteMessage;
 
 import '../models/models.dart';
 import '../services/authentication/authentication.dart';
+// import '../services/database/database.dart';
+// import '../services/health/health.dart';
+// import '../services/map/map.dart';
+import '../services/notification/notification.dart';
 import '../services/report/report.dart';
 import '../utils/utils.dart'
   show AppIcon;
