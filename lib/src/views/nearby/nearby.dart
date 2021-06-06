@@ -8,7 +8,7 @@ import '../../controllers/controllers.dart'
   show
     NearbyBinding,
     NearbyController;
-import '../views.dart'
+import '../../route.dart'
   show AppRoute;
 
 part 'test.dart';

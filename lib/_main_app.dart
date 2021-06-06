@@ -1,5 +1,7 @@
 import 'dart:async'
   show runZonedGuarded;
+import 'dart:io'
+  show Platform;
 
 import 'package:flutter/material.dart'
   show Colors;
@@ -28,24 +30,26 @@ void run() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runZonedGuarded(() async {
-    /// mobile setup [SystemChrome] application
-    /// orientation to portrait only.
-    ///
-    /// and set [OverlayStyle] for status bar
-    /// on mobile, when used application.
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.dark.copyWith(
-        statusBarColor: Colors.transparent,
-      ),
-    );
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
+    if ( Platform.isAndroid || Platform.isIOS ) {
+      /// mobile setup [SystemChrome] application
+      /// orientation to portrait only.
+      ///
+      /// and set [OverlayStyle] for status bar
+      /// on mobile, when used application.
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle.dark.copyWith(
+          statusBarColor: Colors.transparent,
+        ),
+      );
+      await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
+    }
 
     await AppService.init(
       debugMode: kDebugMode);
 
-    runApp(const MobileApp());
+    runApp(const App());
   }, (error, stackTrace) {
     FlutterError.reportError(
       FlutterErrorDetails(

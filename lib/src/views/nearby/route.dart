@@ -1,20 +1,24 @@
 part of view.nearby;
 
-class NearbyRoute extends AppRoute {
-  static const String _nearby = NearbyView.routeName;
-  static const String test = TestView.routeName;
+class NearbyRoute implements AppRoute {
+  NearbyRoute()
+    : _pages = [
+        GetPage<void>(
+          name: _nearby,
+          page: () => const NearbyView(),
+          binding: NearbyBinding(),
+        ),
+        GetPage<void>(
+          name: test,
+          page: () => const _TestView(),
+        ),
+      ],
+      super();
 
-  static final List<GetPage> _pages = <GetPage>[
-    GetPage<Object>(
-      name: _nearby,
-      page: () => const NearbyView(),
-      binding: NearbyBinding(),
-    ),
-    GetPage<Object>(
-      name: test,
-      page: () => const TestView(),
-    ),
-  ];
+  static const String _nearby = NearbyView.routeName;
+  static const String test = _TestView.routeName;
+
+  final List<GetPage> _pages;
 
   @override
   int get id => 2;

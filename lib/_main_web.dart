@@ -11,15 +11,15 @@ import 'package:flutter/foundation.dart'
     ErrorDescription,
     FlutterErrorDetails;
 
+import 'src/app.dart';
 import 'src/utils/utils.dart'
   show AppText;
-import 'src/web.dart';
 
 void run() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runZonedGuarded(() {
-    runApp(const WebApp());
+    runApp(const App());
   }, (error, stackTrace) {
     FlutterError.reportError(
       FlutterErrorDetails(

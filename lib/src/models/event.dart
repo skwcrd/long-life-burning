@@ -17,23 +17,24 @@ class EventModel {
 
   factory EventModel.fromMap(Map<String, dynamic> data) =>
     EventModel._(
-      id: data["id"],
+      id: data["id"].toString(),
       type: EventType.values.firstWhere(
         (e) => e.value == data["type"]),
       province: ProvinceType.values.firstWhere(
         (e) => e.value == data["province"]),
-      title: data["title"],
-      subtitle: data["subtitle"],
-      detail: data["detail"],
+      title: data["title"].toString(),
+      subtitle: data["subtitle"].toString(),
+      detail: data["detail"].toString(),
       // locateName: data["locateName"],
       // location: data["location"],
-      dateTime: DateTime.tryParse(data["dateTime"])!,
-      price: num.tryParse(data["price"])!,
+      dateTime: DateTime.tryParse(data["dateTime"].toString())!,
+      price: num.tryParse(data["price"].toString())!,
       // users: data["users"],
     );
 
   factory EventModel.fromJson(String data) =>
-      EventModel.fromMap(json.decode(data));
+      EventModel.fromMap(
+        json.decode(data) as Map<String, dynamic>);
 
   final String id;
   final EventType type;
@@ -48,7 +49,7 @@ class EventModel {
   // final List users;
 
   Map<String, dynamic> toMap() =>
-      {
+      <String, dynamic>{
         "id": id,
         'type': type.value,
         "province": province.value,

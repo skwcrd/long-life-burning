@@ -4,6 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -15,12 +16,17 @@ buildscript {
         // The Crashlytics Gradle plugin.
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.6.1'
     }
+
+    configurations.classpath {
+        resolutionStrategy.activateDependencyLocking()
+    }
 }
 
 allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 }
 
@@ -28,10 +34,13 @@ rootProject.buildDir = '../build'
 
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-
-subprojects {
     project.evaluationDependsOn(':app')
+
+    dependencyLocking {
+        ignoredDependencies.add('io.flutter:*')
+        lockFile = file("${rootProject.projectDir}/project-${project.name}.lockfile")
+        lockAllConfigurations()
+    }
 }
 
 task clean(type: Delete) {

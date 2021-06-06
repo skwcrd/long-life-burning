@@ -13,6 +13,13 @@ import 'health/health.dart';
 import 'notification/notification.dart';
 import 'report/report.dart';
 
+export 'authentication/authentication.dart';
+// export 'database/database.dart';
+// export 'health/health.dart';
+// export 'map/map.dart';
+export 'notification/notification.dart';
+export 'report/report.dart';
+
 class AppService {
   AppService._() {
     _initialized = true;

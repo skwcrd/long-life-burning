@@ -12,7 +12,7 @@ class _GoogleAuthService {
           _provider
             ..addScope('email')
             ..addScope('https://www.googleapis.com/auth/fitness.activity.read')
-            ..setCustomParameters({
+            ..setCustomParameters(<String, String>{
               'login_hint': 'user@example.com'
             });
         }

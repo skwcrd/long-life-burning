@@ -1,20 +1,24 @@
 part of view.group;
 
-class GroupRoute extends AppRoute {
-  static const String _group = GroupView.routeName;
-  static const String test = TestView.routeName;
+class GroupRoute implements AppRoute {
+  GroupRoute()
+    : _pages = [
+        GetPage<void>(
+          name: _group,
+          page: () => const GroupView(),
+          binding: GroupBinding(),
+        ),
+        GetPage<void>(
+          name: test,
+          page: () => const _TestView(),
+        ),
+      ],
+      super();
 
-  static final List<GetPage> _pages = <GetPage>[
-    GetPage<Object>(
-      name: _group,
-      page: () => const GroupView(),
-      binding: GroupBinding(),
-    ),
-    GetPage<Object>(
-      name: test,
-      page: () => const TestView(),
-    ),
-  ];
+  static const String _group = GroupView.routeName;
+  static const String test = _TestView.routeName;
+
+  final List<GetPage> _pages;
 
   @override
   int get id => 4;

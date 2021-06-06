@@ -1,8 +1,8 @@
 part of view.menu;
 
-class TestView extends StatelessWidget {
+class _TestView extends StatelessWidget {
   /// The test page in app.
-  const TestView({ Key? key }) : super(key: key);
+  const _TestView({ Key? key }) : super(key: key);
 
   /// The route name or path test page.
   static const String routeName = '/menu/test';

@@ -1,20 +1,24 @@
 part of view.notification;
 
-class NotifyRoute extends AppRoute {
-  static const String _notify = NotifyView.routeName;
-  static const String test = TestView.routeName;
+class NotifyRoute implements AppRoute {
+  NotifyRoute()
+    : _pages = [
+        GetPage<void>(
+          name: _notify,
+          page: () => const NotifyView(),
+          binding: NotifyBinding(),
+        ),
+        GetPage<void>(
+          name: test,
+          page: () => const _TestView(),
+        ),
+      ],
+      super();
 
-  final List<GetPage> _pages = <GetPage>[
-    GetPage<Object>(
-      name: _notify,
-      page: () => const NotifyView(),
-      binding: NotifyBinding(),
-    ),
-    GetPage<Object>(
-      name: test,
-      page: () => const TestView(),
-    ),
-  ];
+  static const String _notify = NotifyView.routeName;
+  static const String test = _TestView.routeName;
+
+  final List<GetPage> _pages;
 
   @override
   int get id => 5;

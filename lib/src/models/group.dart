@@ -12,17 +12,18 @@ class GroupModel {
 
   factory GroupModel.fromMap(Map<String, dynamic> data) =>
     GroupModel._(
-      id: data["id"],
-      name: data["name"],
+      id: data["id"].toString(),
+      name: data["name"].toString(),
       type: GroupType.values.firstWhere(
         (e) => e.value == data["type"]),
-      dateTime: DateTime.tryParse(data["dateTime"])!,
+      dateTime: DateTime.tryParse(data["dateTime"].toString())!,
       // location: data["location"],
       // users: data["users"],
     );
 
   factory GroupModel.fromJson(String data) =>
-      GroupModel.fromMap(json.decode(data));
+      GroupModel.fromMap(
+        json.decode(data) as Map<String, dynamic>);
 
   final String id;
   final String name;
@@ -32,7 +33,7 @@ class GroupModel {
   // final List users;
 
   Map<String, dynamic> toMap() =>
-      {
+      <String, dynamic>{
         "id": id,
         "name": name,
         'type': type.value,

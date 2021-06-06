@@ -5,22 +5,24 @@ import 'package:flutter/foundation.dart'
   show
     kDebugMode,
     kProfileMode;
+import 'package:flutter_gen/gen_l10n/localizations.dart'
+  show AppLocalizations;
 
 import 'package:get/get.dart'
   show GetMaterialApp;
 
+import '_index/_index.dart'
+  show Index;
 import 'controllers/controllers.dart'
   show AppBinding;
 import 'utils/utils.dart'
   show
     AppText,
     AppTheme;
-import 'views/views.dart'
-  show IndexView;
 
-class MobileApp extends StatelessWidget {
+class App extends StatelessWidget {
   /// start widget root app, run in main app.
-  const MobileApp({ Key? key }) : super(key: key);
+  const App({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) =>
@@ -41,16 +43,21 @@ class MobileApp extends StatelessWidget {
       // onInit: () {},
       // onDispose: () {},
       title: AppText.app,
-      /// Initial setting application theme
-      /// [Brightness, Colors, TextTheme, AppBarTheme]
-      /// [TextTheme] set at headline4 or display1
-      /// used in the 2014 version of material design.
-      /// [AppBarTheme] set appbar elevation.
+      /// Initial setting application theme.
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       /// The name of the first route to show,
       /// if a [Navigator] is built.
       /// (start with index page)
-      home: const IndexView(),
+      home: const Index(),
+      /// The initial locale for this app's [Localizations] widget
+      /// is based on this value.
+      locale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('en', 'US'),
+      /// The list of locales that this app has been localized for.
+      supportedLocales: AppLocalizations.supportedLocales,
+      /// The delegates collectively define all of the localized resources
+      /// for this application's [Localizations] widget.
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
     );
 }

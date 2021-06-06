@@ -10,13 +10,14 @@ class NotifyModel {
 
   factory NotifyModel.fromMap(Map<String, dynamic> data) =>
       NotifyModel._(
-        id: num.tryParse(data["id"])!,
-        title: data["title"],
-        body: data["body"],
-        dateTime: DateTime.tryParse(data["dateTime"])!);
+        id: num.tryParse(data["id"].toString())!,
+        title: data["title"].toString(),
+        body: data["body"].toString(),
+        dateTime: DateTime.tryParse(data["dateTime"].toString())!);
 
   factory NotifyModel.fromJson(String data) =>
-      NotifyModel.fromMap(json.decode(data));
+      NotifyModel.fromMap(
+        json.decode(data) as Map<String, dynamic>);
 
   final num id;
   final String title;
@@ -24,7 +25,7 @@ class NotifyModel {
   final DateTime dateTime;
 
   Map<String, dynamic> toMap() =>
-      {
+      <String, dynamic>{
         "id": id,
         "title": title,
         "body": body,

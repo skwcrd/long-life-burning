@@ -1,0 +1,1 @@
+Application community for workout built using the Flutter framework.

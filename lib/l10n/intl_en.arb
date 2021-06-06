@@ -1,0 +1,26 @@
+{
+    "home": "Home",
+    "@home": {
+      "description": "The home page."
+    },
+    "nearby": "Near by me",
+    "@nearby": {
+      "description": "The search places near by me page."
+    },
+    "event": "Marathon event",
+    "@event": {
+      "description": "The marathon event announcement page."
+    },
+    "group": "Sport group",
+    "@group": {
+      "description": "The sport group announcement page."
+    },
+    "notify": "Notification",
+    "@notify": {
+      "description": "The notification display page."
+    },
+    "menu": "Menu",
+    "@menu": {
+      "description": "The menu page."
+    }
+}

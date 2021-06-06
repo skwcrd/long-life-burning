@@ -23,10 +23,10 @@ import 'package:get/get.dart'
 //     GeoPoint,
 //     Timestamp;
 
+import '../route.dart'
+  show AppRoute;
 import '../services/report/report.dart';
 import '../utils/utils.dart';
-import '../views/views.dart'
-  show AppRoute;
 
 part 'event.dart';
 part 'group.dart';

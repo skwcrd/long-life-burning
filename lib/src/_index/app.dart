@@ -1,8 +1,8 @@
-part of view;
+part of _index;
 
-class IndexView extends GetView<AppController> {
+class _IndexApp extends GetView<AppController> {
   /// The index page in app used for display menu selection.
-  const IndexView({ Key? key }) : super(key: key);
+  const _IndexApp({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) =>

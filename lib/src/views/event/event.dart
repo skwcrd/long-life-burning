@@ -8,7 +8,7 @@ import '../../controllers/controllers.dart'
   show
     EventBinding,
     EventController;
-import '../views.dart'
+import '../../route.dart'
   show AppRoute;
 
 part 'test.dart';

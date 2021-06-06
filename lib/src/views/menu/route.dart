@@ -1,20 +1,24 @@
 part of view.menu;
 
-class MenuRoute extends AppRoute {
-  static const String _menu = MenuView.routeName;
-  static const String test = TestView.routeName;
+class MenuRoute implements AppRoute {
+  MenuRoute()
+    : _pages = [
+        GetPage<void>(
+          name: _menu,
+          page: () => const MenuView(),
+          binding: MenuBinding(),
+        ),
+        GetPage<void>(
+          name: test,
+          page: () => const _TestView(),
+        ),
+      ],
+      super();
 
-  static final List<GetPage> _pages = <GetPage>[
-    GetPage<Object>(
-      name: _menu,
-      page: () => const MenuView(),
-      binding: MenuBinding(),
-    ),
-    GetPage<Object>(
-      name: test,
-      page: () => const TestView(),
-    ),
-  ];
+  static const String _menu = MenuView.routeName;
+  static const String test = _TestView.routeName;
+
+  final List<GetPage> _pages;
 
   @override
   int get id => 6;

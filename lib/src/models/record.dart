@@ -13,18 +13,19 @@ class RecordModel {
 
   factory RecordModel.fromMap(Map<String, dynamic> data) =>
       RecordModel._(
-        id: num.tryParse(data["id"])!,
-        step: num.tryParse(data["step"])!,
-        calories: num.tryParse(data["calories"])!,
-        distance: num.tryParse(data["distance"])!,
+        id: num.tryParse(data["id"].toString())!,
+        step: num.tryParse(data["step"].toString())!,
+        calories: num.tryParse(data["calories"].toString())!,
+        distance: num.tryParse(data["distance"].toString())!,
         avgPace: Duration(
-          microseconds: int.tryParse(data["avgPace"])!),
+          microseconds: int.tryParse(data["avgPace"].toString())!),
         duration: Duration(
-          microseconds: int.tryParse(data["duration"])!),
-        dateTime: DateTime.tryParse(data["dateTime"])!);
+          microseconds: int.tryParse(data["duration"].toString())!),
+        dateTime: DateTime.tryParse(data["dateTime"].toString())!);
 
   factory RecordModel.fromJson(String data) =>
-      RecordModel.fromMap(json.decode(data));
+      RecordModel.fromMap(
+        json.decode(data) as Map<String, dynamic>);
 
   final num id;
   final num step;
@@ -35,7 +36,7 @@ class RecordModel {
   final DateTime dateTime;
 
   Map<String, dynamic> toMap() =>
-      {
+      <String, dynamic>{
         "id": id,
         "step": step,
         "calories": calories,

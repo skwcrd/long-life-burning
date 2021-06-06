@@ -1,20 +1,24 @@
 part of view.home;
 
-class HomeRoute extends AppRoute {
-  static const String _home = HomeView.routeName;
-  static const String test = TestView.routeName;
+class HomeRoute implements AppRoute {
+  HomeRoute()
+    : _pages = [
+        GetPage<void>(
+          name: _home,
+          page: () => const HomeView(),
+          binding: HomeBinding(),
+        ),
+        GetPage<void>(
+          name: test,
+          page: () => const _TestView(),
+        ),
+      ],
+      super();
 
-  final List<GetPage> _pages = <GetPage>[
-    GetPage<Object>(
-      name: _home,
-      page: () => const HomeView(),
-      binding: HomeBinding(),
-    ),
-    GetPage<Object>(
-      name: test,
-      page: () => const TestView(),
-    ),
-  ];
+  static const String _home = HomeView.routeName;
+  static const String test = _TestView.routeName;
+
+  final List<GetPage> _pages;
 
   @override
   int get id => 1;
