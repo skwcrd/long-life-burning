@@ -5,6 +5,6 @@ class MenuBinding extends Bindings {
   void dependencies() {
     Get.put(
       MenuController._(),
-      permanent: true);
+      tag: MenuController.tag);
   }
 }

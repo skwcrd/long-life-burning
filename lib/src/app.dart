@@ -3,13 +3,16 @@ library application;
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'
   show
+    kIsWeb,
     kDebugMode,
     kProfileMode;
 import 'package:flutter_gen/gen_l10n/localizations.dart'
   show AppLocalizations;
 
 import 'package:get/get.dart'
-  show GetMaterialApp;
+  show
+    Transition,
+    GetMaterialApp;
 
 import '_index/_index.dart'
   show Index;
@@ -50,6 +53,9 @@ class App extends StatelessWidget {
       /// if a [Navigator] is built.
       /// (start with index page)
       home: const Index(),
+      defaultTransition: kIsWeb
+        ? Transition.noTransition
+        : Transition.native,
       /// The initial locale for this app's [Localizations] widget
       /// is based on this value.
       locale: const Locale('en', 'US'),

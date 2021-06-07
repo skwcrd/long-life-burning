@@ -5,6 +5,6 @@ class HomeBinding extends Bindings {
   void dependencies() {
     Get.put(
       HomeController._(),
-      permanent: true);
+      tag: HomeController.tag);
   }
 }

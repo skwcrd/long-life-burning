@@ -42,7 +42,7 @@ class HomeView extends GetView<HomeController> {
             ),
             TextButton(
               onPressed: () {
-                Get.toNamed<Object>(
+                Get.toNamed<void>(
                   HomeRoute.test,
                   id: AppRoute.home.id);
               },

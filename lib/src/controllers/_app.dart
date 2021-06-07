@@ -37,6 +37,8 @@ class AppController extends GetxController {
       ],
       super();
 
+  static const String tag = 'app/mobile';
+
   final RxInt _index;
   final List<NavBarModel> _navigator;
 
@@ -79,20 +81,20 @@ class AppController extends GetxController {
           offstage: _index.value != i,
           child: Navigator(
             key: Get.nestedKey(_navigator[i].id),
+            reportsRouteUpdateToEngine: true,
+            restorationScopeId: _navigator[i].label,
+            observers: _navigator[i].observers,
+            onGenerateRoute: (settings) =>
+                PageRedirect(settings, null).page<void>(),
+            onGenerateInitialRoutes: (navigator, initialRoute) => [
+              PageRedirect(
+                RouteSettings(name: initialRoute),
+                null).page<void>(),
+            ],
             /// The name of the first route to show,
             /// if a [Navigator] is built.
             /// (start with index page)
             initialRoute: _navigator[i].route.index,
-            observers: _navigator[i].observers,
-            onGenerateRoute: (settings) => PageRedirect(
-              settings, null).page<Object>(),
-            onGenerateInitialRoutes: (navigator, initialRoute) => [
-              PageRedirect(
-                RouteSettings(name: initialRoute),
-                null).page<Object>(),
-            ],
-            reportsRouteUpdateToEngine: true,
-            restorationScopeId: _navigator[i].label,
           ),
         ),
       ));

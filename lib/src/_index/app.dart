@@ -9,7 +9,7 @@ class _IndexApp extends GetView<AppController> {
     ObxValue<RxInt>(
       (index) => WillPopScope(
         onWillPop: () async => !await Get.global(
-          controller.id[index.value]).currentState!.maybePop<Object>(),
+          controller.id[index.value]).currentState!.maybePop<void>(),
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: Stack(

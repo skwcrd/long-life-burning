@@ -3,6 +3,8 @@ part of controller;
 class WebController extends GetxController {
   WebController._() : super();
 
+  static const String tag = 'app/web';
+
   // @override
   // void onInit() {
   //   super.onInit();

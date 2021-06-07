@@ -7,6 +7,8 @@ class NotifyController extends GetxController {
       _token = RxnString(),
       super();
 
+  static const String tag = 'notification';
+
   int _id;
 
   final RxnString _token;

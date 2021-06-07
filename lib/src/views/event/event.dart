@@ -42,7 +42,7 @@ class EventView extends GetView<EventController> {
             ),
             TextButton(
               onPressed: () {
-                Get.toNamed<Object>(
+                Get.toNamed<void>(
                   EventRoute.test,
                   id: AppRoute.event.id);
               },

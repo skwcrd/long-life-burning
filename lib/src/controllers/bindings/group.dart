@@ -5,6 +5,6 @@ class GroupBinding extends Bindings {
   void dependencies() {
     Get.put(
       GroupController._(),
-      permanent: true);
+      tag: GroupController.tag);
   }
 }

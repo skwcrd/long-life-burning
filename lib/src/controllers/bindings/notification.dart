@@ -5,6 +5,6 @@ class NotifyBinding extends Bindings {
   void dependencies() {
     Get.put(
       NotifyController._(),
-      permanent: true);
+      tag: NotifyController.tag);
   }
 }

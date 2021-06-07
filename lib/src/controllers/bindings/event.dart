@@ -5,6 +5,6 @@ class EventBinding extends Bindings {
   void dependencies() {
     Get.put(
       EventController._(),
-      permanent: true);
+      tag: EventController.tag);
   }
 }

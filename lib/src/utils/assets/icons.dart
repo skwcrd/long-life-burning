@@ -32,72 +32,71 @@ class AppIcon {
 class _IconAndroid {
   _IconAndroid._();
 
-  static const String _materialFamily = 'MaterialIcons';
+  static const String _iconFont = 'MaterialIcons';
 
   static const IconData home = IconData(
-    0xe88a,
-    fontFamily: _materialFamily,
-  );
+    0xe318,
+    fontFamily: _iconFont);
 
   static const IconData nearby = IconData(
-    0xe569,
-    fontFamily: _materialFamily,
-  );
+    0xe498,
+    fontFamily: _iconFont);
 
   static const IconData event = IconData(
-    0xe878,
-    fontFamily: _materialFamily,
-  );
+    0xe241,
+    fontFamily: _iconFont,
+    matchTextDirection: true);
 
   static const IconData group = IconData(
-    0xe7ef,
-    fontFamily: _materialFamily,
-  );
+    0xe2ee,
+    fontFamily: _iconFont);
 
   static const IconData notify = IconData(
-    0xe7f4,
-    fontFamily: _materialFamily,
-  );
+    0xe44f,
+    fontFamily: _iconFont);
 
   static const IconData menu = IconData(
-    0xe5d2,
-    fontFamily: _materialFamily,
-  );
+    0xe3dc,
+    fontFamily: _iconFont);
 }
 
 // Icons on iOS
 class _IconiOS {
   _IconiOS._();
 
-  static const String _cupertinoFamily = 'CupertinoIcons';
+  /// The icon font used for Cupertino icons.
+  static const String _iconFont = 'CupertinoIcons';
+
+  /// The dependent package providing the Cupertino icons font.
+  static const String _iconFontPackage = 'cupertino_icons';
 
   static const IconData home = IconData(
-    0xf38f,
-    fontFamily: _cupertinoFamily,
-  );
+    0xf447,
+    fontFamily: _iconFont,
+    fontPackage: _iconFontPackage);
 
   static const IconData nearby = IconData(
-    0xf474,
-    fontFamily: _cupertinoFamily,
-  );
+    0xf455,
+    fontFamily: _iconFont,
+    fontPackage: _iconFontPackage);
 
   static const IconData event = IconData(
-    0xf3f4,
-    fontFamily: _cupertinoFamily,
-  );
+    0xf8b6,
+    fontFamily: _iconFont,
+    fontPackage: _iconFontPackage);
 
   static const IconData group = IconData(
     0xf47c,
-    fontFamily: _cupertinoFamily,
-  );
+    fontFamily: _iconFont,
+    fontPackage: _iconFontPackage);
 
   static const IconData notify = IconData(
     0xf3e2,
-    fontFamily: _cupertinoFamily,
-  );
+    fontFamily: _iconFont,
+    fontPackage: _iconFontPackage);
 
   static const IconData menu = IconData(
-    0xf394,
-    fontFamily: _cupertinoFamily,
-  );
+    0xf8b1,
+    fontFamily: _iconFont,
+    fontPackage: _iconFontPackage);
 }

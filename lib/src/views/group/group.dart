@@ -42,7 +42,7 @@ class GroupView extends GetView<GroupController> {
             ),
             TextButton(
               onPressed: () {
-                Get.toNamed<Object>(
+                Get.toNamed<void>(
                   GroupRoute.test,
                   id: AppRoute.group.id);
               },

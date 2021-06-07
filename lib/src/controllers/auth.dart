@@ -11,6 +11,8 @@ class AuthController extends GetxController {
     : _user = Rxn<User>(),
       super();
 
+  static const String tag = 'auth';
+
   final Rxn<User> _user;
 
   User? get user => _user.value;

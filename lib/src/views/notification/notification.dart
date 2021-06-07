@@ -42,7 +42,7 @@ class NotifyView extends GetView<NotifyController> {
             ),
             TextButton(
               onPressed: () {
-                Get.toNamed<Object>(
+                Get.toNamed<void>(
                   NotifyRoute.test,
                   id: AppRoute.notify.id);
               },

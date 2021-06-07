@@ -5,6 +5,6 @@ class NearbyBinding extends Bindings {
   void dependencies() {
     Get.put(
       NearbyController._(),
-      permanent: true);
+      tag: NearbyController.tag);
   }
 }

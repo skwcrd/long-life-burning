@@ -42,7 +42,7 @@ class MenuView extends GetView<MenuController> {
             ),
             TextButton(
               onPressed: () {
-                Get.toNamed<Object>(
+                Get.toNamed<void>(
                   MenuRoute.test,
                   id: AppRoute.menu.id);
               },

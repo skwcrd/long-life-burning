@@ -42,7 +42,7 @@ class NearbyView extends GetView<NearbyController> {
             ),
             TextButton(
               onPressed: () {
-                Get.toNamed<Object>(
+                Get.toNamed<void>(
                   NearbyRoute.test,
                   id: AppRoute.nearby.id);
               },

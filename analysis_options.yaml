@@ -96,6 +96,9 @@ linter:
     no_default_cases: false # (experimental)
     # Don't use null check on a potentially nullable type parameter.
     null_check_on_nullable_type_parameter: false # (experimental)
+    # Prefer asserts with message.
+    # False positive, null checks don't need a message
+    prefer_asserts_with_message: false
     # Prefer using a boolean as the assert condition.
     prefer_bool_in_asserts: false # (deprecated)
     # Prefer double quotes where they won't require escape sequences.
